@@ -100,3 +100,10 @@
 		<liferay-ui:search-iterator displayStyle="<%= lexiconTestDisplayContext.getDisplayStyle() %>" markupView="lexicon" />
 	</liferay-ui:search-container>
 </div>
+
+<liferay-frontend:add-menu>
+	<liferay-frontend:add-menu-item
+		title='<%= LanguageUtil.get(request, "add-new-super-hero")%>'
+		url="<%= lexiconTestDisplayContext.getEditURL().toString() %>"
+	/>
+</liferay-frontend:add-menu>
