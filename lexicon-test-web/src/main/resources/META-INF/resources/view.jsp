@@ -60,3 +60,43 @@
 	</liferay-frontend:management-bar-buttons>
 
 </liferay-frontend:management-bar>
+
+<div class="container-fluid-1280">
+	<liferay-ui:search-container
+		id="superHeros"
+		searchContainer="<%= lexiconTestDisplayContext.getSearchContainer() %>"
+	>
+		<liferay-ui:search-container-row
+			className="com.liferay.lexicon.test.web.internal.model.Element"
+			keyProperty="elementId"
+			modelVar="element"
+		>
+			<c:choose>
+				<c:when test='<%= Objects.equals(lexiconTestDisplayContext.getDisplayStyle(), "list") %>'>
+					<liferay-ui:search-container-column-text
+						cssClass="table-cell-content"
+						name="name"
+					/>
+				</c:when>
+
+				<c:when test='<%= Objects.equals(lexiconTestDisplayContext.getDisplayStyle(), "icon") %>'>
+
+					<%
+					row.setCssClass("entry-card lfr-asset-item");
+					%>
+
+					<liferay-ui:search-container-column-text>
+						<liferay-frontend:vertical-card
+							imageUrl="<%= element.getUrl() %>"
+							resultRow="<%= row %>"
+							rowChecker="<%= searchContainer.getRowChecker() %>"
+							title="<%= element.getName() %>"
+						/>
+					</liferay-ui:search-container-column-text>
+				</c:when>
+			</c:choose>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator displayStyle="<%= lexiconTestDisplayContext.getDisplayStyle() %>" markupView="lexicon" />
+	</liferay-ui:search-container>
+</div>
