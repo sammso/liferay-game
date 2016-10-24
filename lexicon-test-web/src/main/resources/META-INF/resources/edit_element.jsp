@@ -22,3 +22,17 @@ portletDisplay.setURLBack(lexiconTestDisplayContext.getRedirect());
 
 renderResponse.setTitle(LanguageUtil.get(request, "add-new-super-hero"));
 %>
+
+<aui:form action="" cssClass="container-fluid-1280">
+	<aui:fieldset-group markupView="lexicon">
+		<aui:fieldset>
+			<aui:input name="title" />
+		</aui:fieldset>
+	</aui:fieldset-group>
+</aui:form>
+
+<aui:button-row>
+	<aui:button cssClass="btn-lg" type="submit" />
+
+	<aui:button cssClass="btn-lg" type="cancel" />
+</aui:button-row>
