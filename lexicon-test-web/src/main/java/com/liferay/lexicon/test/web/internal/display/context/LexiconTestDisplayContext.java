@@ -122,6 +122,9 @@ public class LexiconTestDisplayContext {
 		_searchContainer.setRowChecker(
 			new EmptyOnClickRowChecker(_portletResponse));
 
+		_searchContainer.setEmptyResultsMessageCssClass(
+			"taglib-empty-result-message-header-has-plus-btn");
+
 		return _searchContainer;
 	}
 
