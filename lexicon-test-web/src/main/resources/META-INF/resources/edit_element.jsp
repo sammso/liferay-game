@@ -16,4 +16,9 @@
 
 <%@ include file="/init.jsp" %>
 
-<p>Lexicon Test Add Template</p>
+<%
+portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(lexiconTestDisplayContext.getRedirect());
+
+renderResponse.setTitle(LanguageUtil.get(request, "add-new-super-hero"));
+%>
