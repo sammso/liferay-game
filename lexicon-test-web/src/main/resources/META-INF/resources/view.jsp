@@ -16,4 +16,14 @@
 
 <%@ include file="/init.jsp" %>
 
-<p>Lexicon Test Portlet</p>
+<liferay-portlet:renderURL varImpl="mainURL" />
+
+<aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
+	<aui:nav cssClass="navbar-nav">
+		<aui:nav-item href="<%= mainURL.toString() %>" label="super-hero" selected="<%= true %>" />
+	</aui:nav>
+
+	<aui:nav-bar-search>
+		<liferay-ui:input-search markupView="lexicon" />
+	</aui:nav-bar-search>
+</aui:nav-bar>
