@@ -125,6 +125,12 @@ public class LexiconTestDisplayContext {
 		_searchContainer.setEmptyResultsMessageCssClass(
 			"taglib-empty-result-message-header-has-plus-btn");
 
+		_searchContainer.setTotal(_getTotal());
+		_searchContainer.setResults(
+			ListUtil.subList(
+				_getResults(), _searchContainer.getStart(),
+				_searchContainer.getEnd()));
+
 		return _searchContainer;
 	}
 
