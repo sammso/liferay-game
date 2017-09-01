@@ -65,7 +65,7 @@
 		searchContainer="<%= lexiconTestDisplayContext.getSearchContainer() %>"
 	>
 		<liferay-ui:search-container-row
-			className="com.liferay.lexicon.test.web.internal.model.Element"
+			className="com.liferay.lexicon.test.service.model.Element"
 			keyProperty="elementId"
 			modelVar="element"
 		>
