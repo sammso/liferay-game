@@ -25,9 +25,15 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.lexicon.test.web.internal.display.context.LexiconTestDisplayContext" %><%@
+<%@ page import="com.liferay.lexicon.test.model.Element" %><%@
+page import="com.liferay.lexicon.test.web.internal.display.context.LexiconTestDisplayContext" %><%@
+page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
-page import="com.liferay.portal.kernel.portlet.PortletURLUtil" %>
+page import="com.liferay.portal.kernel.portlet.PortletURLUtil" %><%@
+page import="com.liferay.portal.kernel.util.Constants" %><%@
+page import="com.liferay.portal.kernel.util.StringPool" %><%@
+page import="com.liferay.portal.kernel.util.WebKeys" %><%@
+page import="com.liferay.taglib.search.ResultRow" %>
 
 <%@ page import="java.util.Objects" %>
 

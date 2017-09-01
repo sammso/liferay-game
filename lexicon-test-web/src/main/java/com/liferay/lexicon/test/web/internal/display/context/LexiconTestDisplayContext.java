@@ -14,7 +14,9 @@
 
 package com.liferay.lexicon.test.web.internal.display.context;
 
-import com.liferay.lexicon.test.service.service.ElementLocalServiceUtil;
+import com.liferay.lexicon.test.model.Element;
+import com.liferay.lexicon.test.service.ElementLocalServiceUtil;
+import com.liferay.lexicon.test.web.internal.constant.LexiconTestWebKeys;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -63,10 +65,18 @@ public class LexiconTestDisplayContext {
 
 		PortletURL portletURL = _portletResponse.createRenderURL();
 
-		portletURL.setParameter("mvcPath", "/edit_element.jsp");
+		portletURL.setParameter(
+			"mvcRenderCommandName", "/lexicon_test/edit_element");
 		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
 
 		return portletURL;
+	}
+
+	public Element getElement() {
+		Element element = (Element)_request.getAttribute(
+			LexiconTestWebKeys.LEXICON_TEST_ELEMENT);
+
+		return element;
 	}
 
 	public String getOrderByCol() {
@@ -126,7 +136,8 @@ public class LexiconTestDisplayContext {
 
 		_searchContainer.setTotal(_getTotal());
 		_searchContainer.setResults(
-			ElementLocalServiceUtil.getElements(themeDisplay.getScopeGroupId(),
+			ElementLocalServiceUtil.getElements(
+				themeDisplay.getScopeGroupId(),
 			_searchContainer.getStart(), _searchContainer.getEnd()));
 
 		return _searchContainer;
