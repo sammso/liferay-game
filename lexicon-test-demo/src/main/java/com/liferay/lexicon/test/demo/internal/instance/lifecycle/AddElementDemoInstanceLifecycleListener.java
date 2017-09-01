@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.util.PropsValues;
 
 import org.osgi.service.component.annotations.Component;
@@ -37,9 +39,6 @@ public class AddElementDemoInstanceLifecycleListener
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
-		long defaultUserId = _userLocalService.getDefaultUserId(
-			company.getCompanyId());
-
 		Group defaultGroup = _groupLocalService.getGroup(
 			company.getCompanyId(),
 			PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
@@ -48,15 +47,18 @@ public class AddElementDemoInstanceLifecycleListener
 			return;
 		}
 
+		long defaultUserId = _userLocalService.getDefaultUserId(
+			company.getCompanyId());
+
+		String baseUrl = _getPortalURL(company);
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		for (int i = 0; i < _NAMES.length; i++) {
-			String name = _NAMES[i];
-
-			String url = _IMAGE_BASE_URL + "/images/" + _URLS[i] + "_xl.png";
+			String url = baseUrl + _IMAGE_RELATIVE_URL + _URLS[i] + "_xl.png";
 
 			_elementLocalService.addElement(
-				defaultUserId, defaultGroup.getGroupId(), name, url,
+				defaultUserId, defaultGroup.getGroupId(), _NAMES[i], url,
 				serviceContext);
 		}
 	}
@@ -66,8 +68,18 @@ public class AddElementDemoInstanceLifecycleListener
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
-	private static final String _IMAGE_BASE_URL =
-		"http://localhost:8080/o/lexicon-test-web";
+	private String _getPortalURL(Company company) {
+		String liferayHost = GetterUtil.getString(
+			System.getenv("LIFERAY_HOST"), company.getVirtualHostname());
+
+		int liferayPort = GetterUtil.getInteger(
+			System.getenv("LIFERAY_PORT"), _portal.getPortalServerPort(false));
+
+		return _portal.getPortalURL(liferayHost, liferayPort, false);
+	}
+
+	private static final String _IMAGE_RELATIVE_URL =
+		"/o/lexicon-test-web/images/";
 
 	private static final String[] _NAMES = {
 		"Batman", "Captain America", "Flash", "Green Lantern", "IronMan",
@@ -84,6 +96,9 @@ public class AddElementDemoInstanceLifecycleListener
 
 	@Reference
 	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private UserLocalService _userLocalService;
