@@ -154,7 +154,7 @@ public class LexiconTestDisplayContext {
 	}
 
 	private String _displayStyle;
-	private String[] _names = new String[] {
+	private String[] _names = {
 		"Batman", "Captain America", "Flash", "Green Lantern", "IronMan",
 		"Robin", "SpiderMan", "Superman", "Wolverine", "WonderWoman"
 	};
@@ -165,7 +165,7 @@ public class LexiconTestDisplayContext {
 	private String _redirect;
 	private final HttpServletRequest _request;
 	private SearchContainer _searchContainer;
-	private String[] _urls = new String[] {
+	private String[] _urls = {
 		"batman", "captainamerica", "flash", "greenlantern", "ironman", "robin",
 		"spiderman", "superman", "wolverine", "wonderwoman"
 	};

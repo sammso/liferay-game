@@ -32,7 +32,6 @@
 	includeCheckBox="<%= true %>"
 	searchContainerId="superHeros"
 >
-
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
 			navigationKeys='<%= new String[] {"all"} %>'
@@ -58,7 +57,6 @@
 			selectedDisplayStyle="<%= lexiconTestDisplayContext.getDisplayStyle() %>"
 		/>
 	</liferay-frontend:management-bar-buttons>
-
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280">
@@ -78,7 +76,6 @@
 						name="name"
 					/>
 				</c:when>
-
 				<c:when test='<%= Objects.equals(lexiconTestDisplayContext.getDisplayStyle(), "icon") %>'>
 
 					<%
@@ -103,7 +100,7 @@
 
 <liferay-frontend:add-menu>
 	<liferay-frontend:add-menu-item
-		title='<%= LanguageUtil.get(request, "add-new-super-hero")%>'
+		title='<%= LanguageUtil.get(request, "add-new-super-hero") %>'
 		url="<%= lexiconTestDisplayContext.getEditURL().toString() %>"
 	/>
 </liferay-frontend:add-menu>
