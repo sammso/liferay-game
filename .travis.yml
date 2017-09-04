@@ -12,6 +12,11 @@ services:
 sudo: required
 
 before_install:
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" != "7.0.x-private" ]; then
+          echo "Terminating build since there is also a pull request build running.";
+          travis_terminate 0;
+       fi'
+
     # Install Catch Reports
 
     - curl -O https://liferay-labs.github.io/reports-catcher/catch-reports.sh
