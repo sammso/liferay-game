@@ -1,4 +1,4 @@
-FROM cgoncas/slim-liferay-portal-image:20170904123527
+FROM cgoncas/slim-liferay-portal-image:20170904134548
 MAINTAINER Ruben Pulido <ruben.pulido@liferay.com>
 
 COPY *.?ar $LIFERAY_HOME/osgi/modules/
