@@ -12,6 +12,11 @@ services:
 sudo: required
 
 before_install:
+    # Install Catch Reports
+
+    - curl -O https://liferay-labs.github.io/reports-catcher/catch-reports.sh
+    - chmod +x catch-reports.sh
+
     - ./gradlew buildAppDocker
 
     - ./gradlew runDocker
@@ -24,3 +29,6 @@ script:
 before_cache:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
     - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+after_script:
+    - ./catch-reports.sh
