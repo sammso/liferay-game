@@ -24,7 +24,7 @@
               "Repo": "DEPLOYMENT_ARTIFACTS_REPO",
               "PollForSourceChanges": "true",
               "Branch": "DEPLOYMENT_ARTIFACTS_BRANCH",
-              "OAuthToken": "GITHUB_OAUTH_TOKEN"
+              "OAuthToken": "GITHUB_TOKEN"
             },
             "runOrder": 1
           },
@@ -47,7 +47,7 @@
               "Repo": "TEST_REPO",
               "PollForSourceChanges": "false",
               "Branch": "TEST_BRANCH",
-              "OAuthToken": "GITHUB_OAUTH_TOKEN"
+              "OAuthToken": "GITHUB_TOKEN"
             },
             "runOrder": 1
           }
