@@ -139,11 +139,11 @@ task runDocker(type: Exec) {
 }
 
 def getImageName() {
-	return project.property("docker.image.name")
+	return System.getenv().get("DOCKER_IMAGE_NAME")
 }
 
 def getImageVersion() {
-	return project.property("docker.image.version")
+	return System.getenv().get("DOCKER_IMAGE_VERSION")
 }
 
 def getImageOrg() {
