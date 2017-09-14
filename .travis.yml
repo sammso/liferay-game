@@ -58,30 +58,35 @@ script:
     # Install AWS CLI and EB
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+    chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/setup_aws_cli_bundle.sh
            ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/setup_aws_cli_bundle.sh;
        fi'
 
    # Delete Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+           chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/cleanup_deployment_pipeline.sh;
            ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/cleanup_deployment_pipeline.sh;
        fi'
 
     # Update deployment repository to trigger Continuous Delivery Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+           chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/update_deployment_repository.sh;
            ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/update_deployment_repository.sh;
        fi'
 
     # Update deployment specifications
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+          chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/update_deployment_specifications.sh;
           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/update_deployment_specifications.sh;
        fi'
 
    # Setup Pipeline prereqs and Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+          chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/setup_deployment_pipeline.sh;
           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/setup_deployment_pipeline.sh;
        fi'
 
