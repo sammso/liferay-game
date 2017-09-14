@@ -40,7 +40,7 @@ script:
      # Publish docker image to Docker Hub
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
-           ./gradlew build pushAppDockerImage -x test -x testIntegration;
+           ./gradlew build pushAppDockerImage -x test -x testIntegration -x findbugsMain -x findbugsTestIntegration;
        fi'
 
     - DOCKER_IMAGE_VERSION=$(docker images ${DOCKER_ORG}/${DOCKER_IMAGE_NAME} --format "{{.Tag}}" | grep ".*T.*Z")
