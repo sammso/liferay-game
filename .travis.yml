@@ -59,7 +59,7 @@ script:
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
            cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/;
-           chmod a+x ./setup_aws_cli_bundle.sh
+           chmod a+x ./setup_aws_cli_bundle.sh;
            ./setup_aws_cli_bundle.sh;
        fi'
 
@@ -74,7 +74,7 @@ script:
     # Update deployment repository to trigger Continuous Delivery Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
-           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/
+           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/;
            chmod a+x ./update_deployment_repository.sh;
            ./update_deployment_repository.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
        fi'
@@ -93,7 +93,7 @@ script:
           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/;
           chmod a+x ./setup_deployment_pipeline.sh;
           ./setup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
-          cd ${TRAVIS_BUILD_DIR}
+          cd ${TRAVIS_BUILD_DIR};
        fi'
 
 before_cache:
