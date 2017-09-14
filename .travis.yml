@@ -58,36 +58,42 @@ script:
     # Install AWS CLI and EB
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
-    chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/setup_aws_cli_bundle.sh
-           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/setup_aws_cli_bundle.sh;
+           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/;
+           chmod a+x ./setup_aws_cli_bundle.sh
+           ./setup_aws_cli_bundle.sh;
        fi'
 
    # Delete Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
-           chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/cleanup_deployment_pipeline.sh;
-           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/cleanup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
+           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/;
+           chmod a+x ./cleanup_deployment_pipeline.sh;
+           ./cleanup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
        fi'
 
     # Update deployment repository to trigger Continuous Delivery Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
-           chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/update_deployment_repository.sh;
-           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/update_deployment_repository.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
+           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/
+           chmod a+x ./update_deployment_repository.sh;
+           ./update_deployment_repository.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
        fi'
 
     # Update deployment specifications
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
-          chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/update_deployment_specifications.sh;
-          ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/update_deployment_specifications.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
+          cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/;
+          chmod a+x ./update_deployment_specifications.sh;
+          ./update_deployment_specifications.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
        fi'
 
    # Setup Pipeline prereqs and Pipeline
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
-          chmod a+x ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/setup_deployment_pipeline.sh;
-          ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/setup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
+          cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/;
+          chmod a+x ./setup_deployment_pipeline.sh;
+          ./setup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config;
+          cd ${TRAVIS_BUILD_DIR}
        fi'
 
 before_cache:
