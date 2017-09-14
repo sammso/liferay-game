@@ -32,6 +32,9 @@ before_install:
 install: true
 
 script:
+    # Fail when a line fails
+    - set pipefail
+
     - ./gradlew testIntegration
 
      # Publish docker image to Docker Hub
