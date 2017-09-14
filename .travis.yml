@@ -27,7 +27,7 @@ before_install:
 
     - source ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config/setup_deployment_pipeline.env
 
-    - ./gradlew buildAppDocker runDocker -Pdocker.image.name=$DOCKER_IMAGE_NAME -Pdocker.image.version=$DOCKER_IMAGE_VERSION -Pdocker.org=$DOCKER_ORG
+    - ./gradlew buildAppDocker runDocker -Pdocker.image.name=$DOCKER_IMAGE_NAME -Pdocker.image.version=latest -Pdocker.org=$DOCKER_ORG
 
 install: true
 
@@ -39,6 +39,8 @@ script:
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
            ./gradlew build pushAppDockerImage -x test -x testIntegration;
        fi'
+
+    - DOCKER_IMAGE_VERSION=$(docker images ${DOCKER_ORG}/${DOCKER_IMAGE_NAME} --format "{{.Tag}}" | grep ".*T.*Z")
 
     # Clone Sepia Repo
 
