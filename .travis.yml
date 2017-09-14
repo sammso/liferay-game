@@ -43,7 +43,7 @@ script:
            ./gradlew pushAppDockerImage -Pdocker.image.name=$DOCKER_IMAGE_NAME -Pdocker.org=$DOCKER_ORG;
        fi'
 
-    - DOCKER_IMAGE_VERSION=$(docker images ${DOCKER_ORG}/${DOCKER_IMAGE_NAME} --format "{{.Tag}}" | grep ".*T.*Z")
+    - export DOCKER_IMAGE_VERSION=$(docker images ${DOCKER_ORG}/${DOCKER_IMAGE_NAME} --format "{{.Tag}}" | grep ".*T.*Z")
 
     # Clone Sepia Repo
 
