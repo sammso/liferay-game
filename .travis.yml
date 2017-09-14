@@ -23,6 +23,10 @@ before_install:
     - curl -O https://liferay-labs.github.io/reports-catcher/catch-reports.sh
     - chmod +x catch-reports.sh
 
+    # Load config variables
+
+    - source ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config/setup_deployment_pipeline.env
+
     - ./gradlew buildAppDocker
 
     - ./gradlew runDocker
@@ -31,6 +35,52 @@ install: true
 
 script:
     - ./gradlew testIntegration
+
+     # Publish docker image to Docker Hub
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+           ./gradlew build pushAppDockerImage -x test -x testIntegration;
+       fi'
+
+    # Clone Sepia Repo
+
+    - cd ${TRAVIS_BUILD_DIR}/..
+    - git clone --branch=master git@github.com:liferay-labs/sepia-deployment-scripts.git
+    - cd ${TRAVIS_BUILD_DIR}
+
+    # moreutils (to be able to use sponge command)
+
+    - sudo apt-get install moreutils
+
+    # Install AWS CLI and EB
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/setup_aws_cli_bundle.sh;
+       fi'
+
+   # Delete Pipeline
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/cleanup_deployment_pipeline.sh;
+       fi'
+
+    # Update deployment repository to trigger Continuous Delivery Pipeline
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+           ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/travis/update_deployment_repository.sh;
+       fi'
+
+    # Update deployment specifications
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+          ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/update_deployment_specifications.sh;
+       fi'
+
+   # Setup Pipeline prereqs and Pipeline
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+          ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/setup_deployment_pipeline.sh;
+       fi'
 
 before_cache:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

@@ -57,7 +57,7 @@ if (GradleUtil.getProperty(project, "docker.apply.plugin").toBoolean()) {
 
 	appDocker {
 		imageName this.getImageName()
-		imageUser this.getUserName()
+		imageUser this.getOrg()
 		inputDir "lexicon-test-docker"
 	}
 
@@ -139,19 +139,19 @@ task runDocker(type: Exec) {
 }
 
 def getImageName() {
-	return project.property("docker.image.name")
+	return System.getenv().get("DOCKER_IMAGE_NAME")
 }
 
 def getImageVersion() {
-	return project.property("docker.image.version")
+	return System.getenv().get("DOCKER_IMAGE_VERSION")
 }
 
-def getUserName() {
-	return project.property("docker.username")
+def getOrg() {
+	return System.getenv().get("DOCKER_ORG")
 }
 
 def getImageNameWithUser() {
-	return getUserName() + "/" + getImageName()
+	return getOrg() + "/" + getImageName()
 }
 
 def getImageNameWithUserAndVersion() {
