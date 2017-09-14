@@ -55,6 +55,16 @@ script:
 
     - sudo apt-get install moreutils
 
+    # Install pip3
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+           sudo apt-get -y install python3-pip python-dev;
+           sudo pip3 install -U setuptools;
+           sudo pip3 install -U virtualenvwrapper;
+           python3 -V;
+           pip3 -V;
+       fi'
+
     # Install AWS CLI and EB
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
