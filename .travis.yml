@@ -27,9 +27,7 @@ before_install:
 
     - source ${TRAVIS_BUILD_DIR}/lexicon-test-deployment/aws/deployment-pipeline/config/setup_deployment_pipeline.env
 
-    - ./gradlew buildAppDocker
-
-    - ./gradlew runDocker
+    - ./gradlew buildAppDocker runDocker -Pdocker.image.name=$DOCKER_IMAGE_NAME -Pdocker.image.version=$DOCKER_IMAGE_VERSION -Pdocker.org=$DOCKER_ORG
 
 install: true
 
