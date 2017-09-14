@@ -48,7 +48,7 @@ script:
     # Clone Sepia Repo
 
     - cd ${TRAVIS_BUILD_DIR}/..
-    - git clone --branch=master git@github.com:liferay-labs/sepia-deployment-scripts.git
+    - git clone https://github.com/liferay-labs/sepia-deployment-scripts.git
     - cd ${TRAVIS_BUILD_DIR}
 
     # moreutils (to be able to use sponge command)
