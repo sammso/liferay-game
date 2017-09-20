@@ -93,7 +93,7 @@ script:
 
    # If pipeline does not exist, create it anyway
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" != "true" ] && [$? -ne 0]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" != "true" ] && [ $? -ne 0 ]; then
            recreatePipeline="true";
            echo "setting recreatePipeline to true";
        fi'
