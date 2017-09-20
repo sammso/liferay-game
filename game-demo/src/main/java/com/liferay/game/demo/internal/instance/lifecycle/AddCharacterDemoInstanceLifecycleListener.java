@@ -62,7 +62,7 @@ public class AddCharacterDemoInstanceLifecycleListener
 					_GOT_URLS[i];
 
 				_characterLocalService.addCharacter(
-					defaultUserId, defaultGroup.getGroupId(), _HERO_NAMES[i],
+					defaultUserId, defaultGroup.getGroupId(), _GOT_NAMES[i],
 					url, serviceContext);
 			}
 		}
