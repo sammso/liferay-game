@@ -3,11 +3,11 @@
 
 <service-builder package-path="com.liferay.game">
 	<namespace>Game</namespace>
-	<entity local-service="true" name="Element" remote-service="true" uuid="true">
+	<entity local-service="true" name="Character" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
-		<column name="elementId" primary="true" type="long" />
+		<column name="characterId" primary="true" type="long" />
 
 		<!-- Group instance -->
 

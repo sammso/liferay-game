@@ -16,7 +16,7 @@ package com.liferay.game.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.game.service.ElementServiceUtil;
+import com.liferay.game.service.CharacterServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link ElementServiceUtil} service utility. The
+ * {@link CharacterServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link HttpPrincipal} parameter.
@@ -48,21 +48,21 @@ import com.liferay.portal.kernel.util.MethodKey;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see ElementServiceSoap
+ * @see CharacterServiceSoap
  * @see HttpPrincipal
- * @see ElementServiceUtil
+ * @see CharacterServiceUtil
  * @generated
  */
 @ProviderType
-public class ElementServiceHttp {
-	public static com.liferay.game.model.Element addElement(
+public class CharacterServiceHttp {
+	public static com.liferay.game.model.Character addCharacter(
 		HttpPrincipal httpPrincipal, long userId, long groupId,
 		java.lang.String name, java.lang.String url,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
-			MethodKey methodKey = new MethodKey(ElementServiceUtil.class,
-					"addElement", _addElementParameterTypes0);
+			MethodKey methodKey = new MethodKey(CharacterServiceUtil.class,
+					"addCharacter", _addCharacterParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, name, url, serviceContext);
@@ -80,7 +80,7 @@ public class ElementServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (com.liferay.game.model.Element)returnObj;
+			return (com.liferay.game.model.Character)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -89,14 +89,15 @@ public class ElementServiceHttp {
 		}
 	}
 
-	public static com.liferay.game.model.Element deleteElement(
-		HttpPrincipal httpPrincipal, long elementId)
+	public static com.liferay.game.model.Character deleteCharacter(
+		HttpPrincipal httpPrincipal, long characterId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
-			MethodKey methodKey = new MethodKey(ElementServiceUtil.class,
-					"deleteElement", _deleteElementParameterTypes1);
+			MethodKey methodKey = new MethodKey(CharacterServiceUtil.class,
+					"deleteCharacter", _deleteCharacterParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, elementId);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					characterId);
 
 			Object returnObj = null;
 
@@ -111,7 +112,7 @@ public class ElementServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (com.liferay.game.model.Element)returnObj;
+			return (com.liferay.game.model.Character)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -120,11 +121,12 @@ public class ElementServiceHttp {
 		}
 	}
 
-	public static void deleteElements(HttpPrincipal httpPrincipal, long groupId)
+	public static void deleteCharacters(HttpPrincipal httpPrincipal,
+		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
-			MethodKey methodKey = new MethodKey(ElementServiceUtil.class,
-					"deleteElements", _deleteElementsParameterTypes2);
+			MethodKey methodKey = new MethodKey(CharacterServiceUtil.class,
+					"deleteCharacters", _deleteCharactersParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -146,14 +148,15 @@ public class ElementServiceHttp {
 		}
 	}
 
-	public static com.liferay.game.model.Element getElement(
-		HttpPrincipal httpPrincipal, long elementId)
+	public static com.liferay.game.model.Character getCharacter(
+		HttpPrincipal httpPrincipal, long characterId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
-			MethodKey methodKey = new MethodKey(ElementServiceUtil.class,
-					"getElement", _getElementParameterTypes3);
+			MethodKey methodKey = new MethodKey(CharacterServiceUtil.class,
+					"getCharacter", _getCharacterParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, elementId);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					characterId);
 
 			Object returnObj = null;
 
@@ -168,7 +171,7 @@ public class ElementServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (com.liferay.game.model.Element)returnObj;
+			return (com.liferay.game.model.Character)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -177,11 +180,11 @@ public class ElementServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.game.model.Element> getElements(
+	public static java.util.List<com.liferay.game.model.Character> getCharacters(
 		HttpPrincipal httpPrincipal, long groupId, int start, int end) {
 		try {
-			MethodKey methodKey = new MethodKey(ElementServiceUtil.class,
-					"getElements", _getElementsParameterTypes4);
+			MethodKey methodKey = new MethodKey(CharacterServiceUtil.class,
+					"getCharacters", _getCharactersParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					start, end);
@@ -195,7 +198,7 @@ public class ElementServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (java.util.List<com.liferay.game.model.Element>)returnObj;
+			return (java.util.List<com.liferay.game.model.Character>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -204,16 +207,16 @@ public class ElementServiceHttp {
 		}
 	}
 
-	public static com.liferay.game.model.Element updateElement(
-		HttpPrincipal httpPrincipal, long elementId, java.lang.String name,
+	public static com.liferay.game.model.Character updateCharacter(
+		HttpPrincipal httpPrincipal, long characterId, java.lang.String name,
 		java.lang.String url)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
-			MethodKey methodKey = new MethodKey(ElementServiceUtil.class,
-					"updateElement", _updateElementParameterTypes5);
+			MethodKey methodKey = new MethodKey(CharacterServiceUtil.class,
+					"updateCharacter", _updateCharacterParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					elementId, name, url);
+					characterId, name, url);
 
 			Object returnObj = null;
 
@@ -228,7 +231,7 @@ public class ElementServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (com.liferay.game.model.Element)returnObj;
+			return (com.liferay.game.model.Character)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -237,25 +240,25 @@ public class ElementServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ElementServiceHttp.class);
-	private static final Class<?>[] _addElementParameterTypes0 = new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(CharacterServiceHttp.class);
+	private static final Class<?>[] _addCharacterParameterTypes0 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteElementParameterTypes1 = new Class[] {
+	private static final Class<?>[] _deleteCharacterParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _deleteElementsParameterTypes2 = new Class[] {
+	private static final Class<?>[] _deleteCharactersParameterTypes2 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getElementParameterTypes3 = new Class[] {
+	private static final Class<?>[] _getCharacterParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getElementsParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCharactersParameterTypes4 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _updateElementParameterTypes5 = new Class[] {
+	private static final Class<?>[] _updateCharacterParameterTypes5 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class
 		};
 }

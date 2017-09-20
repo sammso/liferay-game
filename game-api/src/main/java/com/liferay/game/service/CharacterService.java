@@ -16,7 +16,7 @@ package com.liferay.game.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.game.model.Element;
+import com.liferay.game.model.Character;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -32,42 +32,43 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import java.util.List;
 
 /**
- * Provides the remote service interface for Element. Methods of this
+ * Provides the remote service interface for Character. Methods of this
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
- * @see ElementServiceUtil
- * @see com.liferay.game.service.base.ElementServiceBaseImpl
- * @see com.liferay.game.service.impl.ElementServiceImpl
+ * @see CharacterServiceUtil
+ * @see com.liferay.game.service.base.CharacterServiceBaseImpl
+ * @see com.liferay.game.service.impl.CharacterServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
 @OSGiBeanProperties(property =  {
-	"json.web.service.context.name=game", "json.web.service.context.path=Element"}, service = ElementService.class)
+	"json.web.service.context.name=game", "json.web.service.context.path=Character"}, service = CharacterService.class)
 @ProviderType
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ElementService extends BaseService {
+public interface CharacterService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link ElementServiceUtil} to access the element remote service. Add custom service methods to {@link com.liferay.game.service.impl.ElementServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CharacterServiceUtil} to access the character remote service. Add custom service methods to {@link com.liferay.game.service.impl.CharacterServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public Element addElement(long userId, long groupId, java.lang.String name,
-		java.lang.String url, ServiceContext serviceContext)
+	public Character addCharacter(long userId, long groupId,
+		java.lang.String name, java.lang.String url,
+		ServiceContext serviceContext) throws PortalException;
+
+	public Character deleteCharacter(long characterId)
 		throws PortalException;
 
-	public Element deleteElement(long elementId) throws PortalException;
-
-	public void deleteElements(long groupId) throws PortalException;
+	public void deleteCharacters(long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Element getElement(long elementId) throws PortalException;
+	public Character getCharacter(long characterId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Element> getElements(long groupId, int start, int end);
+	public List<Character> getCharacters(long groupId, int start, int end);
 
 	/**
 	* Returns the OSGi service identifier.
@@ -76,6 +77,6 @@ public interface ElementService extends BaseService {
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
 
-	public Element updateElement(long elementId, java.lang.String name,
+	public Character updateCharacter(long characterId, java.lang.String name,
 		java.lang.String url) throws PortalException;
 }

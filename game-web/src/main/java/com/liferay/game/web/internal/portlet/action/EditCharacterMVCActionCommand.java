@@ -14,7 +14,8 @@
 
 package com.liferay.game.web.internal.portlet.action;
 
-import com.liferay.game.service.ElementLocalService;
+import com.liferay.game.exception.NoSuchCharacterException;
+import com.liferay.game.service.CharacterLocalService;
 import com.liferay.game.web.internal.constant.GamePortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -26,8 +27,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-
-import java.util.NoSuchElementException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -42,28 +41,29 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + GamePortletKeys.GAME,
-		"mvc.command.name=/game/edit_element"
+		"mvc.command.name=/game/edit_character"
 	},
 	service = MVCActionCommand.class
 )
-public class EditElementMVCActionCommand extends BaseMVCActionCommand {
+public class EditCharacterMVCActionCommand extends BaseMVCActionCommand {
 
-	protected void deleteElements(ActionRequest actionRequest)
+	protected void deleteCharacters(ActionRequest actionRequest)
 		throws Exception {
 
-		long[] deleteElementIds = null;
+		long[] deleteCharacterIds = null;
 
-		long elementId = ParamUtil.getLong(actionRequest, "elementId");
+		long characterId = ParamUtil.getLong(actionRequest, "characterId");
 
-		if (elementId > 0) {
-			deleteElementIds = new long[] {elementId};
+		if (characterId > 0) {
+			deleteCharacterIds = new long[] {characterId};
 		}
 		else {
-			deleteElementIds = ParamUtil.getLongValues(actionRequest, "rowIds");
+			deleteCharacterIds = ParamUtil.getLongValues(
+				actionRequest, "rowIds");
 		}
 
-		for (long deleteElementId : deleteElementIds) {
-			_elementLocalService.deleteElement(deleteElementId);
+		for (long deleteCharacterId : deleteCharacterIds) {
+			_characterLocalService.deleteCharacter(deleteCharacterId);
 		}
 	}
 
@@ -76,10 +76,10 @@ public class EditElementMVCActionCommand extends BaseMVCActionCommand {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateElement(actionRequest);
+				updateCharacter(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteElements(actionRequest);
+				deleteCharacters(actionRequest);
 			}
 		}
 		catch (Exception e) {
@@ -88,7 +88,7 @@ public class EditElementMVCActionCommand extends BaseMVCActionCommand {
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof NoSuchElementException) {
+			else if (e instanceof NoSuchCharacterException) {
 				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else {
@@ -97,8 +97,10 @@ public class EditElementMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	protected void updateElement(ActionRequest actionRequest) throws Exception {
-		long elementId = ParamUtil.getLong(actionRequest, "elementId");
+	protected void updateCharacter(ActionRequest actionRequest)
+		throws Exception {
+
+		long characterId = ParamUtil.getLong(actionRequest, "characterId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String url = ParamUtil.getString(actionRequest, "url");
@@ -109,17 +111,17 @@ public class EditElementMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		if (elementId <= 0) {
-			_elementLocalService.addElement(
+		if (characterId <= 0) {
+			_characterLocalService.addCharacter(
 				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), name,
 				url, serviceContext);
 		}
 		else {
-			_elementLocalService.updateElement(elementId, name, url);
+			_characterLocalService.updateCharacter(characterId, name, url);
 		}
 	}
 
 	@Reference(unbind = "-")
-	private ElementLocalService _elementLocalService;
+	private CharacterLocalService _characterLocalService;
 
 }

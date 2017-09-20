@@ -1,6 +1,6 @@
-create table Game_Element (
+create table Game_Character (
 	uuid_ VARCHAR(75) null,
-	elementId LONG not null primary key,
+	characterId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,

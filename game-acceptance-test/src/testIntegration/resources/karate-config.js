@@ -20,7 +20,7 @@ function() {
 	}
 
 	config.engineURL = host;
-	config.elementServiceURL = host + '/' + testProjectId;
+	config.characterServiceURL = host + '/' + testProjectId;
 
 	return config;
 }

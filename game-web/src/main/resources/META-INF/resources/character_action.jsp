@@ -19,28 +19,28 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Element element = (Element)row.getObject();
+Character character = (Character)row.getObject();
 %>
 
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
-	<portlet:renderURL var="editElementURL">
-		<portlet:param name="mvcRenderCommandName" value="/game/edit_element" />
+	<portlet:renderURL var="editCharacterURL">
+		<portlet:param name="mvcRenderCommandName" value="/game/edit_character" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="elementId" value="<%= String.valueOf(element.getElementId()) %>" />
+		<portlet:param name="characterId" value="<%= String.valueOf(character.getCharacterId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon
 		message="edit"
-		url="<%= editElementURL %>"
+		url="<%= editCharacterURL %>"
 	/>
 
-	<portlet:actionURL name="/game/edit_element" var="deleteElementURL">
+	<portlet:actionURL name="/game/edit_character" var="deleteCharacterURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="elementId" value="<%= String.valueOf(element.getElementId()) %>" />
+		<portlet:param name="characterId" value="<%= String.valueOf(character.getCharacterId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete
-		url="<%= deleteElementURL %>"
+		url="<%= deleteCharacterURL %>"
 	/>
 </liferay-ui:icon-menu>

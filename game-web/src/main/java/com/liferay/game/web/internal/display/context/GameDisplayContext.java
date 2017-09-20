@@ -14,8 +14,8 @@
 
 package com.liferay.game.web.internal.display.context;
 
-import com.liferay.game.model.Element;
-import com.liferay.game.service.ElementLocalServiceUtil;
+import com.liferay.game.model.Character;
+import com.liferay.game.service.CharacterLocalServiceUtil;
 import com.liferay.game.web.internal.constant.GameWebKeys;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -49,6 +49,13 @@ public class GameDisplayContext {
 		_portletResponse = portletResponse;
 	}
 
+	public Character getCharacter() {
+		Character character = (Character)_request.getAttribute(
+			GameWebKeys.GAME_CHARACTER);
+
+		return character;
+	}
+
 	public String getDisplayStyle() {
 		if (_displayStyle != null) {
 			return _displayStyle;
@@ -65,18 +72,10 @@ public class GameDisplayContext {
 
 		PortletURL portletURL = _portletResponse.createRenderURL();
 
-		portletURL.setParameter(
-			"mvcRenderCommandName", "/game/edit_element");
+		portletURL.setParameter("mvcRenderCommandName", "/game/edit_character");
 		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
 
 		return portletURL;
-	}
-
-	public Element getElement() {
-		Element element = (Element)_request.getAttribute(
-			GameWebKeys.GAME_ELEMENT);
-
-		return element;
 	}
 
 	public String getOrderByCol() {
@@ -136,7 +135,7 @@ public class GameDisplayContext {
 
 		_searchContainer.setTotal(_getTotal());
 		_searchContainer.setResults(
-			ElementLocalServiceUtil.getElements(
+			CharacterLocalServiceUtil.getCharacters(
 				themeDisplay.getScopeGroupId(),
 			_searchContainer.getStart(), _searchContainer.getEnd()));
 

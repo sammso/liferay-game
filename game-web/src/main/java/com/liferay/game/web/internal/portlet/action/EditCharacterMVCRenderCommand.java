@@ -14,9 +14,9 @@
 
 package com.liferay.game.web.internal.portlet.action;
 
-import com.liferay.game.exception.NoSuchElementException;
-import com.liferay.game.model.Element;
-import com.liferay.game.service.ElementLocalService;
+import com.liferay.game.exception.NoSuchCharacterException;
+import com.liferay.game.model.Character;
+import com.liferay.game.service.CharacterLocalService;
 import com.liferay.game.web.internal.constant.GamePortletKeys;
 import com.liferay.game.web.internal.constant.GameWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -38,29 +38,29 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + GamePortletKeys.GAME,
-		"mvc.command.name=/game/edit_element"
+		"mvc.command.name=/game/edit_character"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditElementMVCRenderCommand implements MVCRenderCommand {
+public class EditCharacterMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		long elementId = ParamUtil.getLong(renderRequest, "elementId");
+		long characterId = ParamUtil.getLong(renderRequest, "characterId");
 
 		try {
-			Element element = _elementLocalService.fetchElement(elementId);
+			Character character = _characterLocalService.fetchCharacter(
+				characterId);
 
-			renderRequest.setAttribute(
-				GameWebKeys.GAME_ELEMENT, element);
+			renderRequest.setAttribute(GameWebKeys.GAME_CHARACTER, character);
 
-			return "/edit_element.jsp";
+			return "/edit_character.jsp";
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchElementException ||
+			if (e instanceof NoSuchCharacterException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass());
@@ -74,6 +74,6 @@ public class EditElementMVCRenderCommand implements MVCRenderCommand {
 	}
 
 	@Reference
-	private ElementLocalService _elementLocalService;
+	private CharacterLocalService _characterLocalService;
 
 }

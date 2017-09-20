@@ -23,19 +23,19 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.game.service.http.ElementServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.game.service.http.CharacterServiceSoap}.
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.game.service.http.ElementServiceSoap
+ * @see com.liferay.game.service.http.CharacterServiceSoap
  * @generated
  */
 @ProviderType
-public class ElementSoap implements Serializable {
-	public static ElementSoap toSoapModel(Element model) {
-		ElementSoap soapModel = new ElementSoap();
+public class CharacterSoap implements Serializable {
+	public static CharacterSoap toSoapModel(Character model) {
+		CharacterSoap soapModel = new CharacterSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setElementId(model.getElementId());
+		soapModel.setCharacterId(model.getCharacterId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -48,8 +48,8 @@ public class ElementSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ElementSoap[] toSoapModels(Element[] models) {
-		ElementSoap[] soapModels = new ElementSoap[models.length];
+	public static CharacterSoap[] toSoapModels(Character[] models) {
+		CharacterSoap[] soapModels = new CharacterSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -58,14 +58,14 @@ public class ElementSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static ElementSoap[][] toSoapModels(Element[][] models) {
-		ElementSoap[][] soapModels = null;
+	public static CharacterSoap[][] toSoapModels(Character[][] models) {
+		CharacterSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new ElementSoap[models.length][models[0].length];
+			soapModels = new CharacterSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new ElementSoap[0][0];
+			soapModels = new CharacterSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -75,25 +75,25 @@ public class ElementSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static ElementSoap[] toSoapModels(List<Element> models) {
-		List<ElementSoap> soapModels = new ArrayList<ElementSoap>(models.size());
+	public static CharacterSoap[] toSoapModels(List<Character> models) {
+		List<CharacterSoap> soapModels = new ArrayList<CharacterSoap>(models.size());
 
-		for (Element model : models) {
+		for (Character model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new ElementSoap[soapModels.size()]);
+		return soapModels.toArray(new CharacterSoap[soapModels.size()]);
 	}
 
-	public ElementSoap() {
+	public CharacterSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _elementId;
+		return _characterId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setElementId(pk);
+		setCharacterId(pk);
 	}
 
 	public String getUuid() {
@@ -104,12 +104,12 @@ public class ElementSoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getElementId() {
-		return _elementId;
+	public long getCharacterId() {
+		return _characterId;
 	}
 
-	public void setElementId(long elementId) {
-		_elementId = elementId;
+	public void setCharacterId(long characterId) {
+		_characterId = characterId;
 	}
 
 	public long getGroupId() {
@@ -177,7 +177,7 @@ public class ElementSoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _elementId;
+	private long _characterId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

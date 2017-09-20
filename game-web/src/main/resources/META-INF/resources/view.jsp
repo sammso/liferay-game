@@ -47,7 +47,7 @@
 	</liferay-frontend:management-bar-filters>
 
 	<liferay-frontend:management-bar-action-buttons>
-		<liferay-frontend:management-bar-button href="javascript:;" icon="trash" id="deleteElements" label="delete" />
+		<liferay-frontend:management-bar-button href="javascript:;" icon="trash" id="deleteCharacters" label="delete" />
 	</liferay-frontend:management-bar-action-buttons>
 
 	<liferay-frontend:management-bar-buttons>
@@ -60,20 +60,20 @@
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280">
-	<portlet:actionURL name="/game/edit_element" var="deleteElementsURL">
+	<portlet:actionURL name="/game/edit_character" var="deleteCharactersURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:actionURL>
 
-	<aui:form action="<%= deleteElementsURL %>" name="fm">
+	<aui:form action="<%= deleteCharactersURL %>" name="fm">
 		<liferay-ui:search-container
 			id="superHeros"
 			searchContainer="<%= gameDisplayContext.getSearchContainer() %>"
 		>
 			<liferay-ui:search-container-row
-				className="com.liferay.game.model.Element"
-				keyProperty="elementId"
-				modelVar="element"
+				className="com.liferay.game.model.Character"
+				keyProperty="characterId"
+				modelVar="character"
 			>
 				<c:choose>
 					<c:when test='<%= Objects.equals(gameDisplayContext.getDisplayStyle(), "list") %>'>
@@ -83,7 +83,7 @@
 						/>
 
 						<liferay-ui:search-container-column-jsp
-							path="/element_action.jsp"
+							path="/character_action.jsp"
 						/>
 					</c:when>
 					<c:when test='<%= Objects.equals(gameDisplayContext.getDisplayStyle(), "icon") %>'>
@@ -94,12 +94,12 @@
 
 						<liferay-ui:search-container-column-text>
 							<liferay-frontend:vertical-card
-								actionJsp="/element_action.jsp"
+								actionJsp="/character_action.jsp"
 								actionJspServletContext="<%= application %>"
-								imageUrl="<%= element.getUrl() %>"
+								imageUrl="<%= character.getUrl() %>"
 								resultRow="<%= row %>"
 								rowChecker="<%= searchContainer.getRowChecker() %>"
-								title="<%= element.getName() %>"
+								title="<%= character.getName() %>"
 							/>
 						</liferay-ui:search-container-column-text>
 					</c:when>
@@ -119,7 +119,7 @@
 </liferay-frontend:add-menu>
 
 <aui:script sandbox="<%= true %>">
-	$('#<portlet:namespace />deleteElements').on(
+	$('#<portlet:namespace />deleteCharacters').on(
 		'click',
 		function() {
 			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {

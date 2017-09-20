@@ -14,7 +14,7 @@
 
 package com.liferay.game.demo.internal.instance.lifecycle;
 
-import com.liferay.game.service.ElementLocalService;
+import com.liferay.game.service.CharacterLocalService;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.model.Company;
@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Eduardo Garcia
  */
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
-public class AddElementDemoInstanceLifecycleListener
+public class AddCharacterDemoInstanceLifecycleListener
 	extends BasePortalInstanceLifecycleListener {
 
 	@Override
@@ -43,7 +43,7 @@ public class AddElementDemoInstanceLifecycleListener
 			company.getCompanyId(),
 			PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
-		if (_elementLocalService.getElementsCount() > 0) {
+		if (_characterLocalService.getCharactersCount() > 0) {
 			return;
 		}
 
@@ -57,7 +57,7 @@ public class AddElementDemoInstanceLifecycleListener
 		for (int i = 0; i < _NAMES.length; i++) {
 			String url = baseUrl + _IMAGE_RELATIVE_URL + _URLS[i] + "_xl.png";
 
-			_elementLocalService.addElement(
+			_characterLocalService.addCharacter(
 				defaultUserId, defaultGroup.getGroupId(), _NAMES[i], url,
 				serviceContext);
 		}
@@ -78,8 +78,7 @@ public class AddElementDemoInstanceLifecycleListener
 		return _portal.getPortalURL(liferayHost, liferayPort, false);
 	}
 
-	private static final String _IMAGE_RELATIVE_URL =
-		"/o/game-web/images/";
+	private static final String _IMAGE_RELATIVE_URL = "/o/game-web/images/";
 
 	private static final String[] _NAMES = {
 		"Batman", "Captain America", "Flash", "Green Lantern", "IronMan",
@@ -92,7 +91,7 @@ public class AddElementDemoInstanceLifecycleListener
 	};
 
 	@Reference
-	private ElementLocalService _elementLocalService;
+	private CharacterLocalService _characterLocalService;
 
 	@Reference
 	private GroupLocalService _groupLocalService;

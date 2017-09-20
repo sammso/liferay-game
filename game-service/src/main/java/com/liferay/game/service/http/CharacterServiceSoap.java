@@ -16,7 +16,7 @@ package com.liferay.game.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.game.service.ElementServiceUtil;
+import com.liferay.game.service.CharacterServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -25,7 +25,7 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link ElementServiceUtil} service utility. The
+ * {@link CharacterServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -33,10 +33,10 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.game.model.ElementSoap}.
+ * is translated to an array of {@link com.liferay.game.model.CharacterSoap}.
  * If the method in the service utility returns a
- * {@link com.liferay.game.model.Element}, that is translated to a
- * {@link com.liferay.game.model.ElementSoap}. Methods that SOAP cannot
+ * {@link com.liferay.game.model.Character}, that is translated to a
+ * {@link com.liferay.game.model.CharacterSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -58,22 +58,22 @@ import java.rmi.RemoteException;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see ElementServiceHttp
- * @see com.liferay.game.model.ElementSoap
- * @see ElementServiceUtil
+ * @see CharacterServiceHttp
+ * @see com.liferay.game.model.CharacterSoap
+ * @see CharacterServiceUtil
  * @generated
  */
 @ProviderType
-public class ElementServiceSoap {
-	public static com.liferay.game.model.ElementSoap addElement(
+public class CharacterServiceSoap {
+	public static com.liferay.game.model.CharacterSoap addCharacter(
 		long userId, long groupId, java.lang.String name, java.lang.String url,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.game.model.Element returnValue = ElementServiceUtil.addElement(userId,
+			com.liferay.game.model.Character returnValue = CharacterServiceUtil.addCharacter(userId,
 					groupId, name, url, serviceContext);
 
-			return com.liferay.game.model.ElementSoap.toSoapModel(returnValue);
+			return com.liferay.game.model.CharacterSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -82,12 +82,12 @@ public class ElementServiceSoap {
 		}
 	}
 
-	public static com.liferay.game.model.ElementSoap deleteElement(
-		long elementId) throws RemoteException {
+	public static com.liferay.game.model.CharacterSoap deleteCharacter(
+		long characterId) throws RemoteException {
 		try {
-			com.liferay.game.model.Element returnValue = ElementServiceUtil.deleteElement(elementId);
+			com.liferay.game.model.Character returnValue = CharacterServiceUtil.deleteCharacter(characterId);
 
-			return com.liferay.game.model.ElementSoap.toSoapModel(returnValue);
+			return com.liferay.game.model.CharacterSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -96,9 +96,9 @@ public class ElementServiceSoap {
 		}
 	}
 
-	public static void deleteElements(long groupId) throws RemoteException {
+	public static void deleteCharacters(long groupId) throws RemoteException {
 		try {
-			ElementServiceUtil.deleteElements(groupId);
+			CharacterServiceUtil.deleteCharacters(groupId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,12 +107,12 @@ public class ElementServiceSoap {
 		}
 	}
 
-	public static com.liferay.game.model.ElementSoap getElement(
-		long elementId) throws RemoteException {
+	public static com.liferay.game.model.CharacterSoap getCharacter(
+		long characterId) throws RemoteException {
 		try {
-			com.liferay.game.model.Element returnValue = ElementServiceUtil.getElement(elementId);
+			com.liferay.game.model.Character returnValue = CharacterServiceUtil.getCharacter(characterId);
 
-			return com.liferay.game.model.ElementSoap.toSoapModel(returnValue);
+			return com.liferay.game.model.CharacterSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -121,13 +121,13 @@ public class ElementServiceSoap {
 		}
 	}
 
-	public static com.liferay.game.model.ElementSoap[] getElements(
+	public static com.liferay.game.model.CharacterSoap[] getCharacters(
 		long groupId, int start, int end) throws RemoteException {
 		try {
-			java.util.List<com.liferay.game.model.Element> returnValue = ElementServiceUtil.getElements(groupId,
+			java.util.List<com.liferay.game.model.Character> returnValue = CharacterServiceUtil.getCharacters(groupId,
 					start, end);
 
-			return com.liferay.game.model.ElementSoap.toSoapModels(returnValue);
+			return com.liferay.game.model.CharacterSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -136,14 +136,14 @@ public class ElementServiceSoap {
 		}
 	}
 
-	public static com.liferay.game.model.ElementSoap updateElement(
-		long elementId, java.lang.String name, java.lang.String url)
+	public static com.liferay.game.model.CharacterSoap updateCharacter(
+		long characterId, java.lang.String name, java.lang.String url)
 		throws RemoteException {
 		try {
-			com.liferay.game.model.Element returnValue = ElementServiceUtil.updateElement(elementId,
+			com.liferay.game.model.Character returnValue = CharacterServiceUtil.updateCharacter(characterId,
 					name, url);
 
-			return com.liferay.game.model.ElementSoap.toSoapModel(returnValue);
+			return com.liferay.game.model.CharacterSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -152,5 +152,5 @@ public class ElementServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ElementServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(CharacterServiceSoap.class);
 }

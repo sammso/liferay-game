@@ -17,23 +17,23 @@ package com.liferay.game.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 /**
- * The extended model implementation for the Element service. Represents a row in the &quot;Game_Element&quot; database table, with each column mapped to a property of this class.
+ * The extended model implementation for the Character service. Represents a row in the &quot;Game_Character&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.game.model.Element} interface.
+ * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.game.model.Character} interface.
  * </p>
  *
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class ElementImpl extends ElementBaseImpl {
+public class CharacterImpl extends CharacterBaseImpl {
 
 	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. All methods that expect a element model instance should use the {@link com.liferay.game.model.Element} interface instead.
+	 * Never reference this class directly. All methods that expect a character model instance should use the {@link com.liferay.game.model.Character} interface instead.
 	 */
-	public ElementImpl() {
+	public CharacterImpl() {
 	}
 
 }

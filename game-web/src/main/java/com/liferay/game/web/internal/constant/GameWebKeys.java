@@ -19,6 +19,6 @@ package com.liferay.game.web.internal.constant;
  */
 public class GameWebKeys {
 
-	public static final String GAME_ELEMENT = "GAME_ELEMENT";
+	public static final String GAME_CHARACTER = "GAME_CHARACTER";
 
 }

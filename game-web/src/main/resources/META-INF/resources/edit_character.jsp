@@ -22,23 +22,23 @@ portletDisplay.setURLBack(gameDisplayContext.getRedirect());
 
 renderResponse.setTitle(LanguageUtil.get(request, "add-new-super-hero"));
 
-Element element = gameDisplayContext.getElement();
+Character character = gameDisplayContext.getCharacter();
 
-long elementId = BeanParamUtil.getLong(element, request, "elementId");
+long characterId = BeanParamUtil.getLong(character, request, "characterId");
 %>
 
-<portlet:actionURL name="updateElement" var="updateElementURL" />
+<portlet:actionURL name="updateCharacter" var="updateCharacterURL" />
 
-<portlet:actionURL name="/game/edit_element" var="editElementURL">
-	<portlet:param name="mvcRenderCommandName" value="/game/edit_element" />
+<portlet:actionURL name="/game/edit_character" var="editCharacterURL">
+	<portlet:param name="mvcRenderCommandName" value="/game/edit_character" />
 </portlet:actionURL>
 
-<aui:form action="<%= editElementURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form action="<%= editCharacterURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= gameDisplayContext.getRedirect() %>" />
-	<aui:input name="elementId" type="hidden" value="<%= elementId %>" />
+	<aui:input name="characterId" type="hidden" value="<%= characterId %>" />
 
-	<aui:model-context bean="<%= element %>" model="<%= Element.class %>" />
+	<aui:model-context bean="<%= character %>" model="<%= Character.class %>" />
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>

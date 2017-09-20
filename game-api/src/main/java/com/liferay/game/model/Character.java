@@ -21,26 +21,26 @@ import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.Accessor;
 
 /**
- * The extended model interface for the Element service. Represents a row in the &quot;Game_Element&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the Character service. Represents a row in the &quot;Game_Character&quot; database table, with each column mapped to a property of this class.
  *
  * @author Brian Wing Shun Chan
- * @see ElementModel
- * @see com.liferay.game.model.impl.ElementImpl
- * @see com.liferay.game.model.impl.ElementModelImpl
+ * @see CharacterModel
+ * @see com.liferay.game.model.impl.CharacterImpl
+ * @see com.liferay.game.model.impl.CharacterModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.game.model.impl.ElementImpl")
+@ImplementationClassName("com.liferay.game.model.impl.CharacterImpl")
 @ProviderType
-public interface Element extends ElementModel, PersistedModel {
+public interface Character extends CharacterModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.game.model.impl.ElementImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.game.model.impl.CharacterImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<Element, Long> ELEMENT_ID_ACCESSOR = new Accessor<Element, Long>() {
+	public static final Accessor<Character, Long> CHARACTER_ID_ACCESSOR = new Accessor<Character, Long>() {
 			@Override
-			public Long get(Element element) {
-				return element.getElementId();
+			public Long get(Character character) {
+				return character.getCharacterId();
 			}
 
 			@Override
@@ -49,8 +49,8 @@ public interface Element extends ElementModel, PersistedModel {
 			}
 
 			@Override
-			public Class<Element> getTypeClass() {
-				return Element.class;
+			public Class<Character> getTypeClass() {
+				return Character.class;
 			}
 		};
 }

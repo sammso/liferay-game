@@ -16,7 +16,7 @@ package com.liferay.game.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.game.model.Element;
+import com.liferay.game.model.Character;
 
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -31,27 +31,28 @@ import java.io.ObjectOutput;
 import java.util.Date;
 
 /**
- * The cache model class for representing Element in entity cache.
+ * The cache model class for representing Character in entity cache.
  *
  * @author Brian Wing Shun Chan
- * @see Element
+ * @see Character
  * @generated
  */
 @ProviderType
-public class ElementCacheModel implements CacheModel<Element>, Externalizable {
+public class CharacterCacheModel implements CacheModel<Character>,
+	Externalizable {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
 
-		if (!(obj instanceof ElementCacheModel)) {
+		if (!(obj instanceof CharacterCacheModel)) {
 			return false;
 		}
 
-		ElementCacheModel elementCacheModel = (ElementCacheModel)obj;
+		CharacterCacheModel characterCacheModel = (CharacterCacheModel)obj;
 
-		if (elementId == elementCacheModel.elementId) {
+		if (characterId == characterCacheModel.characterId) {
 			return true;
 		}
 
@@ -60,7 +61,7 @@ public class ElementCacheModel implements CacheModel<Element>, Externalizable {
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, elementId);
+		return HashUtil.hash(0, characterId);
 	}
 
 	@Override
@@ -69,8 +70,8 @@ public class ElementCacheModel implements CacheModel<Element>, Externalizable {
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", elementId=");
-		sb.append(elementId);
+		sb.append(", characterId=");
+		sb.append(characterId);
 		sb.append(", groupId=");
 		sb.append(groupId);
 		sb.append(", companyId=");
@@ -93,66 +94,66 @@ public class ElementCacheModel implements CacheModel<Element>, Externalizable {
 	}
 
 	@Override
-	public Element toEntityModel() {
-		ElementImpl elementImpl = new ElementImpl();
+	public Character toEntityModel() {
+		CharacterImpl characterImpl = new CharacterImpl();
 
 		if (uuid == null) {
-			elementImpl.setUuid(StringPool.BLANK);
+			characterImpl.setUuid(StringPool.BLANK);
 		}
 		else {
-			elementImpl.setUuid(uuid);
+			characterImpl.setUuid(uuid);
 		}
 
-		elementImpl.setElementId(elementId);
-		elementImpl.setGroupId(groupId);
-		elementImpl.setCompanyId(companyId);
-		elementImpl.setUserId(userId);
+		characterImpl.setCharacterId(characterId);
+		characterImpl.setGroupId(groupId);
+		characterImpl.setCompanyId(companyId);
+		characterImpl.setUserId(userId);
 
 		if (userName == null) {
-			elementImpl.setUserName(StringPool.BLANK);
+			characterImpl.setUserName(StringPool.BLANK);
 		}
 		else {
-			elementImpl.setUserName(userName);
+			characterImpl.setUserName(userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
-			elementImpl.setCreateDate(null);
+			characterImpl.setCreateDate(null);
 		}
 		else {
-			elementImpl.setCreateDate(new Date(createDate));
+			characterImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			elementImpl.setModifiedDate(null);
+			characterImpl.setModifiedDate(null);
 		}
 		else {
-			elementImpl.setModifiedDate(new Date(modifiedDate));
+			characterImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
 		if (name == null) {
-			elementImpl.setName(StringPool.BLANK);
+			characterImpl.setName(StringPool.BLANK);
 		}
 		else {
-			elementImpl.setName(name);
+			characterImpl.setName(name);
 		}
 
 		if (url == null) {
-			elementImpl.setUrl(StringPool.BLANK);
+			characterImpl.setUrl(StringPool.BLANK);
 		}
 		else {
-			elementImpl.setUrl(url);
+			characterImpl.setUrl(url);
 		}
 
-		elementImpl.resetOriginalValues();
+		characterImpl.resetOriginalValues();
 
-		return elementImpl;
+		return characterImpl;
 	}
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 
-		elementId = objectInput.readLong();
+		characterId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
 
@@ -176,7 +177,7 @@ public class ElementCacheModel implements CacheModel<Element>, Externalizable {
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(elementId);
+		objectOutput.writeLong(characterId);
 
 		objectOutput.writeLong(groupId);
 
@@ -210,7 +211,7 @@ public class ElementCacheModel implements CacheModel<Element>, Externalizable {
 	}
 
 	public String uuid;
-	public long elementId;
+	public long characterId;
 	public long groupId;
 	public long companyId;
 	public long userId;
