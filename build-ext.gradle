@@ -132,7 +132,6 @@ task runDocker(type: Exec) {
 	commandLine 'docker', 'run',
 			'-e', "JAVA_OPTS=$javaOpts",
 			'-e', "ROOT_DIR=${rootDir}",
-			'-e', "LIFERAY_PORT=8080",
 			'-p', "${project.getProperty('portal.port')}:8080",
 			'-p', '11311:11311',
 			'-p', '8099:8099',

@@ -24,11 +24,16 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.util.PropsValues;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Eduardo Garcia
@@ -50,31 +55,22 @@ public class AddCharacterDemoInstanceLifecycleListener
 		long defaultUserId = _userLocalService.getDefaultUserId(
 			company.getCompanyId());
 
-		String baseUrl = _getPortalURL(company);
-
 		ServiceContext serviceContext = new ServiceContext();
 
-		String topic = "got";
+		String topic = GetterUtil.getString(System.getenv("DEMO_TOPIC"), "got");
 
-		if (topic.equals("got")) {
-			for (int i = 0; i < _GOT_NAMES.length; i++) {
-				String url = baseUrl + _IMAGE_RELATIVE_URL + "got/" +
-					_GOT_URLS[i];
-
-				_characterLocalService.addCharacter(
-					defaultUserId, defaultGroup.getGroupId(), _GOT_NAMES[i],
-					url, serviceContext);
-			}
+		if (!_TOPICS.containsKey(topic)) {
+			return;
 		}
-		else if (topic.equals("heroes")) {
-			for (int i = 0; i < _HERO_NAMES.length; i++) {
-				String url = baseUrl + _IMAGE_RELATIVE_URL + "heroes/" +
-					_HERO_URLS[i];
 
-				_characterLocalService.addCharacter(
-					defaultUserId, defaultGroup.getGroupId(), _HERO_NAMES[i],
-					url, serviceContext);
-			}
+		Map<String, String> resources = _TOPICS.get(topic);
+
+		for (Map.Entry<String, String> entry : resources.entrySet()) {
+			String url = _IMAGE_RELATIVE_URL + topic + "/" + entry.getValue();
+
+			_characterLocalService.addCharacter(
+				defaultUserId, defaultGroup.getGroupId(), entry.getKey(),
+				url, serviceContext);
 		}
 	}
 
@@ -83,37 +79,28 @@ public class AddCharacterDemoInstanceLifecycleListener
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
-	private String _getPortalURL(Company company) {
-		String liferayHost = GetterUtil.getString(
-			System.getenv("LIFERAY_HOST"), company.getVirtualHostname());
+	private static final String[] _GOT = {
+		"Daenerys Targaryen", "daenerys.png", "Jon Snow", "jonsnow.png",
+		"Tyrion Lannister", "tyrion.png", "Ramsay Bolton", "ramsay.png",
+		"Hodor", "hodor.png", "Oberyn Martell", "oberyn.png"};
 
-		int liferayPort = GetterUtil.getInteger(
-			System.getenv("LIFERAY_PORT"), _portal.getPortalServerPort(false));
+	private static final String[] _HEROES = {
+		"Batman", "batman_xl.png", "Captain America", "captainamerica_xl.png",
+		"Flash", "flash_xl.png", "Green Lantern", "greenlantern_xl.png",
+		"IronMan", "ironman_xl.png", "Robin", "robin_xl.png", "SpiderMan",
+		"spiderman_xl.png", "Superman", "superman_xl.png", "Wolverine",
+		"wolverine_xl.png", "WonderWoman", "wonderwoman_xl.png"};
 
-		return _portal.getPortalURL(liferayHost, liferayPort, false);
+	private static final Map<String, Map<String, String>> _TOPICS;
+
+	static {
+		Map<String, Map<String, String>> topics = new HashMap<>();
+
+		topics.put("got", MapUtil.fromArray(_GOT));
+		topics.put("heroes", MapUtil.fromArray(_HEROES));
+
+		_TOPICS = Collections.unmodifiableMap(topics);
 	}
-
-	private static final String[] _GOT_NAMES = {
-		"Daenerys Targaryen", "Jon Snow", "Tyrion Lannister", "Ramsay Bolton",
-		"Hodor", "Oberyn Martell"
-	};
-
-	private static final String[] _GOT_URLS = {
-		"daenerys.png", "jonsnow.png", "tyrion.png", "ramsay.png", "hodor.png",
-		"oberyn.png"
-	};
-
-	private static final String[] _HERO_NAMES = {
-		"Batman", "Captain America", "Flash", "Green Lantern", "IronMan",
-		"Robin", "SpiderMan", "Superman", "Wolverine", "WonderWoman"
-	};
-
-	private static final String[] _HERO_URLS = {
-		"batman_xl.png", "captainamerica_xl.png", "flash_xl.png",
-		"greenlantern_xl.png", "ironman_xl.png", "robin_xl.png",
-		"spiderman_xl.png", "superman_xl.png", "wolverine_xl.png",
-		"wonderwoman_xl.png"
-	};
 
 	private static final String _IMAGE_RELATIVE_URL = "/o/game-web/images/";
 
