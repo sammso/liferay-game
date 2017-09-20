@@ -11,6 +11,6 @@ Feature: Slay of Characters
 
     Scenario: Slaying a dead character
 
-        Given Jon Snow is daed
+        Given Jon Snow is dead
         When I try to slay Jon Snow
         Then I can't slay Jon Snow
