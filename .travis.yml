@@ -63,9 +63,11 @@ script:
 
     - sudo apt-get install moreutils
 
+    - recreatePipeline=$RECREATE_PIPELINE
+
     # Install pip3
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
            sudo apt-get -y install python3-pip python-dev;
            sudo pip3 install -U setuptools;
            sudo pip3 install -U virtualenvwrapper;
@@ -75,15 +77,30 @@ script:
 
     # Install AWS CLI and EB
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
            cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/cli/;
            chmod a+x ./setup_aws_cli_bundle.sh;
            ./setup_aws_cli_bundle.sh;
        fi'
 
+   # Check if Pipeline exists
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" != "true" ]; then
+           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/get/codepipeline/;
+           chmod a+x ./get_deployment_pipeline.sh;
+           ./get_deployment_pipeline.sh;
+       fi'
+
+   # If pipeline does not exist, create it anyway
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" != "true" ] && [$? -ne 0]; then
+           recreatePipeline="true";
+           echo "setting recreatePipeline to true";
+       fi'
+
    # Delete Pipeline
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" = "true" ]; then
            cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/cleanup/codepipeline-cleanup/;
            chmod a+x ./cleanup_deployment_pipeline.sh;
            ./cleanup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/game-deployment/aws/deployment-pipeline/config;
@@ -99,7 +116,7 @@ script:
 
     # Update deployment specifications
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" = "true" ]; then
           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/;
           chmod a+x ./update_deployment_specifications.sh;
           ./update_deployment_specifications.sh -c ${TRAVIS_BUILD_DIR}/game-deployment/aws/deployment-pipeline/config;
@@ -107,7 +124,7 @@ script:
 
    # Setup Pipeline prereqs and Pipeline
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$RECREATE_PIPELINE" = "true" ]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" = "true" ]; then
           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/setup/codepipeline-setup/;
           chmod a+x ./setup_deployment_pipeline.sh;
           ./setup_deployment_pipeline.sh -c ${TRAVIS_BUILD_DIR}/game-deployment/aws/deployment-pipeline/config;
