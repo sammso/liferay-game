@@ -1,16 +1,17 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
- * <p>
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation; either version 2.1 of the License, or (at your option)
  * any later version.
- * <p>
+ *
  * This library is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.game.functional.test;
 
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
@@ -20,7 +21,6 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 import cucumber.runtime.arquillian.CukeSpace;
 
@@ -30,22 +30,22 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
-import org.junit.Assert;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.WebDriver;
 
 /**
- * @author Cristina González
+ * @author Julio Camarero
  */
 @CucumberOptions(
-	features = "features/start.feature",
-	plugin = {"com.cucumber.listener.ExtentCucumberFormatter", "pretty"}
+	features = "features/character_slay.feature",
+	plugin = {"com.cucumber.listener.ExtentCucumberFormatter"}
 )
 @RunAsClient
 @RunWith(CukeSpace.class)
-public class Example {
+public class CharacterSlayFeatureTest {
 
 	@Drone
 	public static WebDriver browser;
@@ -55,31 +55,43 @@ public class Example {
 		FunctionalTestUtil.createReport();
 	}
 
-	@Given("^I am in the main page")
-	public void given() {
-		browser.get(_url.toExternalForm());
+	@AfterClass
+	public static void tearDownClass() {
+	}
 
-		Assert.assertEquals("Welcome - Liferay DXP", browser.getTitle());
+	@Then("^(.+) is dead$")
+	public void cantSaveCharacter() {
+	}
+
+	@Then("^I can't slay (.+)$")
+	public void cantSlayCharacter(String characterName) {
+	}
+
+	@Given("^I am in the list of characters$")
+	public void navigateToListOfCharacters() {
+		browser.get("/");
+	}
+
+	@Given("^I slay (.+)$")
+	public void slayCharacter(String characterName) {
 	}
 
 	@After
-	public void tearDown(Scenario scenario) throws Throwable {
+	public void tearDown(Scenario scenario) {
 		FunctionalTestUtil.checkJavascriptErrors(browser);
 
 		FunctionalTestUtil.takeScreenshot(scenario, browser);
 	}
 
-	@Then("^I see")
-	public void then() {
-		System.out.println("SEE");
+	@Given("^I try to slay (.+)$")
+	public void tryToSlayCharacter(String characterName) {
 	}
 
-	@When("^I click")
-	public void when() {
-		System.out.println("WHEN");
+	@Given("^a character called (.+) exists$")
+	public void verifyExistsCharacter(String characterName) {
 	}
 
 	@ArquillianResource
-	private URL _url;
+	private static URL _url;
 
 }
