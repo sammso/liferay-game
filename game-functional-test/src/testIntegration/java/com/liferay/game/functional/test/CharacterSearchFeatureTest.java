@@ -70,7 +70,7 @@ public class CharacterSearchFeatureTest {
 
 	@Given("^I am in the list of characters$")
 	public void navigateToListOfCharacters() {
-		browser.get("/");
+		browser.get(_url.toExternalForm());
 	}
 
 	@When("^I search for (.+)$")

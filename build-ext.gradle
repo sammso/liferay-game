@@ -54,6 +54,8 @@ configure(subprojects.findAll {!it.childProjects}) {
 		ignoreFailures = false
 
 		systemProperty "test.url",  System.getenv().get("TEST_URL")
+
+		environment "TEST_URL",   System.getenv().get("TEST_URL")?: "http://localhost:8080"
 	}
 }
 
