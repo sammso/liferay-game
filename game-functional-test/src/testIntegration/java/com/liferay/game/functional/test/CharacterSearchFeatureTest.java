@@ -33,6 +33,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.WebDriver;
@@ -46,6 +47,7 @@ import org.openqa.selenium.WebDriver;
 )
 @RunAsClient
 @RunWith(CukeSpace.class)
+@Ignore
 public class CharacterSearchFeatureTest {
 
 	@Drone
