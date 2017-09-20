@@ -113,7 +113,7 @@
 
 <liferay-frontend:add-menu>
 	<liferay-frontend:add-menu-item
-		title='<%= LanguageUtil.get(request, "add-new-super-hero") %>'
+		title='<%= LanguageUtil.get(request, "add-new-character") %>'
 		url="<%= gameDisplayContext.getEditURL().toString() %>"
 	/>
 </liferay-frontend:add-menu>
