@@ -31,6 +31,7 @@ import net.masterthought.cucumber.ReportParser;
 import net.masterthought.cucumber.json.Feature;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -46,6 +47,7 @@ import org.junit.Test;
 	"classpath:features/data_sources/get_data_source.feature",
 	"classpath:features/data_sources/update_data_source.feature"
 })
+@Ignore
 public class AcceptanceTest {
 
 	public static final String REPORTS_LOCATION =
