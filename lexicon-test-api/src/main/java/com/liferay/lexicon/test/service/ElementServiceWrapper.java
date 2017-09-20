@@ -32,6 +32,39 @@ public class ElementServiceWrapper implements ElementService,
 		_elementService = elementService;
 	}
 
+	@Override
+	public com.liferay.lexicon.test.model.Element addElement(long userId,
+		long groupId, java.lang.String name, java.lang.String url,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _elementService.addElement(userId, groupId, name, url,
+			serviceContext);
+	}
+
+	@Override
+	public com.liferay.lexicon.test.model.Element deleteElement(long elementId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _elementService.deleteElement(elementId);
+	}
+
+	@Override
+	public void deleteElements(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_elementService.deleteElements(groupId);
+	}
+
+	@Override
+	public com.liferay.lexicon.test.model.Element getElement(long elementId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _elementService.getElement(elementId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.lexicon.test.model.Element> getElements(
+		long groupId, int start, int end) {
+		return _elementService.getElements(groupId, start, end);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -40,6 +73,13 @@ public class ElementServiceWrapper implements ElementService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _elementService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.lexicon.test.model.Element updateElement(
+		long elementId, java.lang.String name, java.lang.String url)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _elementService.updateElement(elementId, name, url);
 	}
 
 	@Override

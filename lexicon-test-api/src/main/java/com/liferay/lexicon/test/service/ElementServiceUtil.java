@@ -41,6 +41,35 @@ public class ElementServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.lexicon.test.service.impl.ElementServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.lexicon.test.model.Element addElement(
+		long userId, long groupId, java.lang.String name, java.lang.String url,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addElement(userId, groupId, name, url, serviceContext);
+	}
+
+	public static com.liferay.lexicon.test.model.Element deleteElement(
+		long elementId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deleteElement(elementId);
+	}
+
+	public static void deleteElements(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().deleteElements(groupId);
+	}
+
+	public static com.liferay.lexicon.test.model.Element getElement(
+		long elementId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getElement(elementId);
+	}
+
+	public static java.util.List<com.liferay.lexicon.test.model.Element> getElements(
+		long groupId, int start, int end) {
+		return getService().getElements(groupId, start, end);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -49,6 +78,12 @@ public class ElementServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.lexicon.test.model.Element updateElement(
+		long elementId, java.lang.String name, java.lang.String url)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().updateElement(elementId, name, url);
 	}
 
 	public static ElementService getService() {

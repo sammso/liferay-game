@@ -16,9 +16,16 @@ package com.liferay.lexicon.test.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.lexicon.test.service.ElementServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.lexicon.test.service.ElementServiceUtil} service utility. The
+ * {@link ElementServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,97 @@ import aQute.bnd.annotation.ProviderType;
  * @author Brian Wing Shun Chan
  * @see ElementServiceHttp
  * @see com.liferay.lexicon.test.model.ElementSoap
- * @see com.liferay.lexicon.test.service.ElementServiceUtil
+ * @see ElementServiceUtil
  * @generated
  */
 @ProviderType
 public class ElementServiceSoap {
+	public static com.liferay.lexicon.test.model.ElementSoap addElement(
+		long userId, long groupId, java.lang.String name, java.lang.String url,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.lexicon.test.model.Element returnValue = ElementServiceUtil.addElement(userId,
+					groupId, name, url, serviceContext);
+
+			return com.liferay.lexicon.test.model.ElementSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lexicon.test.model.ElementSoap deleteElement(
+		long elementId) throws RemoteException {
+		try {
+			com.liferay.lexicon.test.model.Element returnValue = ElementServiceUtil.deleteElement(elementId);
+
+			return com.liferay.lexicon.test.model.ElementSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteElements(long groupId) throws RemoteException {
+		try {
+			ElementServiceUtil.deleteElements(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lexicon.test.model.ElementSoap getElement(
+		long elementId) throws RemoteException {
+		try {
+			com.liferay.lexicon.test.model.Element returnValue = ElementServiceUtil.getElement(elementId);
+
+			return com.liferay.lexicon.test.model.ElementSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lexicon.test.model.ElementSoap[] getElements(
+		long groupId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.lexicon.test.model.Element> returnValue = ElementServiceUtil.getElements(groupId,
+					start, end);
+
+			return com.liferay.lexicon.test.model.ElementSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lexicon.test.model.ElementSoap updateElement(
+		long elementId, java.lang.String name, java.lang.String url)
+		throws RemoteException {
+		try {
+			com.liferay.lexicon.test.model.Element returnValue = ElementServiceUtil.updateElement(elementId,
+					name, url);
+
+			return com.liferay.lexicon.test.model.ElementSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(ElementServiceSoap.class);
 }
