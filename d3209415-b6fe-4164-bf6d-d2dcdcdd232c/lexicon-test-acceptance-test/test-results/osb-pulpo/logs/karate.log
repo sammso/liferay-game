@@ -1,0 +1,2 @@
+10:19:55.129 [Test worker] DEBUG c.i.karate.cucumber.CucumberRunner - init test class: class com.liferay.lexicon.test.acceptance.test.AcceptanceTest
+10:19:55.194 [Test worker] DEBUG c.i.karate.cucumber.CucumberRunner - init feature file: src/testIntegration/resources/features/contacts_mapping_rule_controller.feature
