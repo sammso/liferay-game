@@ -14,7 +14,12 @@
 
 package com.liferay.lexicon.test.service.impl;
 
+import com.liferay.lexicon.test.model.Element;
 import com.liferay.lexicon.test.service.base.ElementServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
  * The implementation of the element remote service.
@@ -32,9 +37,41 @@ import com.liferay.lexicon.test.service.base.ElementServiceBaseImpl;
  */
 public class ElementServiceImpl extends ElementServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.lexicon.test.service.ElementServiceUtil} to access the element remote service.
-	 */
+	@Override
+	public Element addElement(
+			long userId, long groupId, String name, String url,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return elementLocalService.addElement(
+			userId, groupId, name, url, serviceContext);
+	}
+
+	@Override
+	public Element deleteElement(long elementId) throws PortalException {
+		return elementLocalService.deleteElement(elementId);
+	}
+
+	@Override
+	public void deleteElements(long groupId) throws PortalException {
+		elementLocalService.deleteElements(groupId);
+	}
+
+	@Override
+	public Element getElement(long elementId) throws PortalException {
+		return elementLocalService.getElement(elementId);
+	}
+
+	@Override
+	public List<Element> getElements(long groupId, int start, int end) {
+		return elementLocalService.getElements(groupId, start, end);
+	}
+
+	@Override
+	public Element updateElement(long elementId, String name, String url)
+		throws PortalException {
+
+		return elementLocalService.updateElement(elementId, name, url);
+	}
+
 }
