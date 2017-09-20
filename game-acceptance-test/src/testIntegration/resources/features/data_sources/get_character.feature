@@ -10,6 +10,16 @@ Feature: Getting Data Sources
         * def dataSourcesURL = dataSourcesLink.href
         * replace dataSourcesURL.{projectId} = projectId
 
+#    curl http://localhost:8080/api/jsonws/game.character/get-characters \
+#    -u test@liferay.com:test \
+#    -d groupId=20143 \
+#    -d start=0 \
+#    -d end=10
+
+#    curl http://localhost:8080/api/jsonws/game.character/get-character \
+#    -u test@liferay.com:test \
+#    -d characterId=25703
+
     Scenario: Get a Data Source
 
             # Set Up

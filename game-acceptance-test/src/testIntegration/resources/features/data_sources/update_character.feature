@@ -1,5 +1,11 @@
 Feature: Updating existing Data Sources
 
+#    curl http://localhost:8080/api/jsonws/game.character/update-character \
+#    -u test@liferay.com:test \
+#    -d characterId=22332 \
+#    -d name='abcd' \
+#    -d url='http'
+
     Background: Discover Data Sources URL
 
         Given url engineURL

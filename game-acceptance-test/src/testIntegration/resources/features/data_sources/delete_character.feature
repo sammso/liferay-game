@@ -1,5 +1,13 @@
 Feature: Deleting Data Sources
 
+#    curl http://localhost:8080/api/jsonws/game.character/delete-characters \
+#    -u test@liferay.com:test \
+#    -d groupId=12345
+
+#   curl http://localhost:8080/api/jsonws/game.character/delete-character \
+#  -u test@liferay.com:test \
+#  -d characterId=12345
+
     Background: Discover Data Sources URL
 
         Given url engineURL

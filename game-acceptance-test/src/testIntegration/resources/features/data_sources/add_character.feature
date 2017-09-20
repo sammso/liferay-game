@@ -1,5 +1,13 @@
 Feature: Adding new Data Sources
 
+
+#    curl http://localhost:8080/api/jsonws/game.character/add-character \
+#    -u test@liferay.com:test \
+#    -d userId=12311 \
+#    -d groupId=1212121 \
+#    -d name='abc' \
+#    -d url='http'
+
     Background: Discover Data Sources URL
 
         Given url engineURL
