@@ -60,7 +60,7 @@ public class CharacterSlayFeatureTest {
 	}
 
 	@Then("^(.+) is dead$")
-	public void cantSaveCharacter() {
+	public void cantSaveCharacter(String characterName) {
 	}
 
 	@Then("^I can't slay (.+)$")
