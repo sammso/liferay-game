@@ -1,6 +1,3 @@
-import org.apache.commons.io.FileUtils
-import org.apache.tools.ant.taskdefs.condition.Os
-
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
