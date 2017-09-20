@@ -142,7 +142,7 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 	}
 
 	@Override
-	public int compareTo(Character character) {
+	public int compareTo(java.lang.Character character) {
 		return _character.compareTo(character);
 	}
 
@@ -453,12 +453,12 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<Character> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<java.lang.Character> toCacheModel() {
 		return _character.toCacheModel();
 	}
 
 	@Override
-	public Character toEscapedModel() {
+	public java.lang.Character toEscapedModel() {
 		return new CharacterWrapper(_character.toEscapedModel());
 	}
 
@@ -468,7 +468,7 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 	}
 
 	@Override
-	public Character toUnescapedModel() {
+	public java.lang.Character toUnescapedModel() {
 		return new CharacterWrapper(_character.toUnescapedModel());
 	}
 
