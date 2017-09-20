@@ -100,9 +100,7 @@ public class SetDefaultSiteThemePortalInstanceLifecycleListener
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
-	@Reference(
-		target = "(osgi.web.symbolicname=game-theme)", unbind = "-"
-	)
+	@Reference(target = "(osgi.web.symbolicname=game-theme)", unbind = "-")
 	protected void setServletContext(ServletContext servletContext) {
 	}
 
