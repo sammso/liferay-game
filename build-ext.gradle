@@ -50,6 +50,11 @@ configure(subprojects.findAll {!it.childProjects}) {
 		enabled = false
 	}
 
+	testIntegration {
+		ignoreFailures = false
+
+		systemProperty "test.url",  System.getenv().get("TEST_URL")
+	}
 }
 
 if (GradleUtil.getProperty(project, "docker.apply.plugin").toBoolean()) {
