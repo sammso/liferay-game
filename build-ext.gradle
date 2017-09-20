@@ -63,7 +63,7 @@ if (GradleUtil.getProperty(project, "docker.apply.plugin").toBoolean()) {
 	appDocker {
 		imageName this.getImageName()
 		imageUser this.getOrg()
-		inputDir "lexicon-test-docker"
+		inputDir "game-docker"
 	}
 
 	docker {
