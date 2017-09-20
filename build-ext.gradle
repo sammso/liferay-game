@@ -26,6 +26,13 @@ allprojects {
 }
 
 configure(subprojects.findAll {!it.childProjects}) {
+	node {
+		nodeVersion "8.1.0"
+		npmVersion "5.3.0"
+	}
+}
+
+configure(subprojects.findAll {!it.childProjects && !it.name.contains('theme')}) {
 	liferay {
 		deployDir = new File(getLiferayDeployDir())
 	}
