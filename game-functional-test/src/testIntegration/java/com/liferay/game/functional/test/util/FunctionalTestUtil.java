@@ -14,11 +14,17 @@
 package com.liferay.game.functional.test.util;
 
 import com.cucumber.listener.ExtentCucumberFormatter;
+
 import cucumber.api.Scenario;
+
 import java.io.File;
+
 import java.util.List;
+
 import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
+
 import org.junit.Assert;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -28,20 +34,19 @@ import org.openqa.selenium.WebDriver;
  */
 public class FunctionalTestUtil {
 
+	public static void checkJavascriptErrors(WebDriver webDriver) {
+		final List<JavaScriptError> javaScriptErrors =
+			JavaScriptError.readErrors(webDriver);
+
+		Assert.assertTrue(
+			printErrorMessage(javaScriptErrors), javaScriptErrors.isEmpty());
+	}
+
 	public static void createReport() {
 		File reportFile = new File("build/reports/tests/cucumber/index.html");
 
 		ExtentCucumberFormatter.initiateExtentCucumberFormatter(
 			reportFile, false);
-
-	}
-
-	public static void checkJavascriptErrors(WebDriver webDriver) {
-		final List<JavaScriptError> javaScriptErrors =
-				JavaScriptError.readErrors(webDriver);
-
-		Assert.assertTrue(
-			printErrorMessage(javaScriptErrors), javaScriptErrors.isEmpty());
 	}
 
 	public static void takeScreenshot(Scenario scenario, WebDriver webDriver) {

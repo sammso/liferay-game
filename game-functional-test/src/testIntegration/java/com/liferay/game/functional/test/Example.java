@@ -13,23 +13,27 @@
  */
 package com.liferay.game.functional.test;
 
-import com.cucumber.listener.ExtentCucumberFormatter;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import cucumber.runtime.arquillian.CukeSpace;
-import java.io.File;
+
 import java.net.URL;
+
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -43,6 +47,9 @@ import org.openqa.selenium.WebDriver;
 @RunWith(CukeSpace.class)
 public class Example {
 
+	@Drone
+	public static WebDriver browser;
+
 	@BeforeClass
 	public static void setUpClass() {
 		FunctionalTestUtil.createReport();
@@ -55,16 +62,6 @@ public class Example {
 		Assert.assertEquals("Welcome - Liferay DXP", browser.getTitle());
 	}
 
-	@When("^I click")
-	public void when() {
-		System.out.println("WHEN");
-	}
-
-	@Then("^I see")
-	public void then() {
-		System.out.println("SEE");
-	}
-
 	@After
 	public void tearDown(Scenario scenario) throws Throwable {
 		FunctionalTestUtil.checkJavascriptErrors(browser);
@@ -72,9 +69,17 @@ public class Example {
 		FunctionalTestUtil.takeScreenshot(scenario, browser);
 	}
 
-	@Drone
-	public static WebDriver browser;
+	@Then("^I see")
+	public void then() {
+		System.out.println("SEE");
+	}
+
+	@When("^I click")
+	public void when() {
+		System.out.println("WHEN");
+	}
 
 	@ArquillianResource
 	private URL _url;
+
 }

@@ -40,7 +40,6 @@ public class CommonSteps {
 		Assert.assertFalse(button.isEnabled());
 	}
 
-
 	public static void clickInBackLink(WebDriver browser) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Trying to click on  back link");
@@ -99,7 +98,6 @@ public class CommonSteps {
 		}
 	}
 
-
 	public static WebElement fetchTouchpoint(
 		WebDriver browser, String touchpointName) {
 
@@ -107,7 +105,6 @@ public class CommonSteps {
 			browser, By.xpath("//div[@class='dataset-display']"),
 			By.xpath("//a[contains(., '" + touchpointName + "')]"));
 	}
-
 
 	public static void findTouchpointInList(
 		WebDriver browser, String touchpointName) {
@@ -137,7 +134,6 @@ public class CommonSteps {
 		input.sendKeys(value);
 	}
 
-
 	protected static WebElement getButton(
 		WebDriver browser, String buttonText, String elementType) {
 
@@ -153,7 +149,6 @@ public class CommonSteps {
 		return FunctionalTestLocatorsHelper.getElement(
 			browser, By.xpath(xPath));
 	}
-	
 
 	private static final Log _log = LogFactoryUtil.getLog(CommonSteps.class);
 

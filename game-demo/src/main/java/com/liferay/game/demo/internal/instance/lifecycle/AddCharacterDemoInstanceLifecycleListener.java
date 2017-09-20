@@ -54,12 +54,27 @@ public class AddCharacterDemoInstanceLifecycleListener
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		for (int i = 0; i < _NAMES.length; i++) {
-			String url = baseUrl + _IMAGE_RELATIVE_URL + _URLS[i] + "_xl.png";
+		String topic = "got";
 
-			_characterLocalService.addCharacter(
-				defaultUserId, defaultGroup.getGroupId(), _NAMES[i], url,
-				serviceContext);
+		if (topic.equals("got")) {
+			for (int i = 0; i < _GOT_NAMES.length; i++) {
+				String url = baseUrl + _IMAGE_RELATIVE_URL + "got/" +
+					_GOT_URLS[i];
+
+				_characterLocalService.addCharacter(
+					defaultUserId, defaultGroup.getGroupId(), _HERO_NAMES[i],
+					url, serviceContext);
+			}
+		}
+		else if (topic.equals("heroes")) {
+			for (int i = 0; i < _HERO_NAMES.length; i++) {
+				String url = baseUrl + _IMAGE_RELATIVE_URL + "heroes/" +
+					_HERO_URLS[i];
+
+				_characterLocalService.addCharacter(
+					defaultUserId, defaultGroup.getGroupId(), _HERO_NAMES[i],
+					url, serviceContext);
+			}
 		}
 	}
 
@@ -78,17 +93,29 @@ public class AddCharacterDemoInstanceLifecycleListener
 		return _portal.getPortalURL(liferayHost, liferayPort, false);
 	}
 
-	private static final String _IMAGE_RELATIVE_URL = "/o/game-web/images/";
+	private static final String[] _GOT_NAMES = {
+		"Daenerys Targaryen", "Jon Snow", "Tyrion Lannister", "Ramsay Bolton",
+		"Hodor", "Oberyn Martell"
+	};
 
-	private static final String[] _NAMES = {
+	private static final String[] _GOT_URLS = {
+		"daenerys.png", "jonsnow.png", "tyrion.png", "ramsay.png", "hodor.png",
+		"oberyn.png"
+	};
+
+	private static final String[] _HERO_NAMES = {
 		"Batman", "Captain America", "Flash", "Green Lantern", "IronMan",
 		"Robin", "SpiderMan", "Superman", "Wolverine", "WonderWoman"
 	};
 
-	private static final String[] _URLS = {
-		"batman", "captainamerica", "flash", "greenlantern", "ironman", "robin",
-		"spiderman", "superman", "wolverine", "wonderwoman"
+	private static final String[] _HERO_URLS = {
+		"batman_xl.png", "captainamerica_xl.png", "flash_xl.png",
+		"greenlantern_xl.png", "ironman_xl.png", "robin_xl.png",
+		"spiderman_xl.png", "superman_xl.png", "wolverine_xl.png",
+		"wonderwoman_xl.png"
 	};
+
+	private static final String _IMAGE_RELATIVE_URL = "/o/game-web/images/";
 
 	@Reference
 	private CharacterLocalService _characterLocalService;
