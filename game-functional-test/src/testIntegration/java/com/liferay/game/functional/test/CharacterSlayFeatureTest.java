@@ -69,7 +69,7 @@ public class CharacterSlayFeatureTest {
 
 	@Given("^I am in the list of characters$")
 	public void navigateToListOfCharacters() {
-		browser.get("/");
+		browser.get(_url.toExternalForm());
 	}
 
 	@Given("^I slay (.+)$")
