@@ -97,6 +97,11 @@ public class CharacterLocalServiceImpl extends CharacterLocalServiceBaseImpl {
 	}
 
 	@Override
+	public int getCharactersCount(long groupId) {
+		return characterPersistence.countByGroupId(groupId);
+	}
+
+	@Override
 	public Character updateCharacter(long characterId, String name, String url)
 		throws PortalException {
 
