@@ -20,7 +20,7 @@ function() {
 	}
 
 	config.engineURL = host;
-	config.characterServiceURL = host + '/' + testProjectId;
+	config.characterServiceURL = host + '/api/jsonws/game.character';
 
 	return config;
 }
