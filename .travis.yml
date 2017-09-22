@@ -63,8 +63,6 @@ script:
 
     - sudo apt-get install moreutils
 
-    - recreatePipeline=$RECREATE_PIPELINE
-
     # Install pip3
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
@@ -83,17 +81,21 @@ script:
            ./setup_aws_cli_bundle.sh;
        fi'
 
+    - recreatePipeline=$RECREATE_PIPELINE
+
    # Check if Pipeline exists
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" != "true" ]; then
-           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/get/codepipeline/;
-           chmod a+x ./get_deployment_pipeline.sh;
-           ./get_deployment_pipeline.sh;
+    - PIPELINE_EXISTS_FILE=${TRAVIS_BUILD_DIR}/.pipeline_exists
+
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+           cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/check/codepipeline/;
+           chmod a+x ./check_deployment_pipeline_exists.sh;
+           ./check_deployment_pipeline_exists.sh -n ${APPLICATION_NAME} -f ${PIPELINE_EXISTS_FILE};
        fi'
 
    # If pipeline does not exist, create it anyway
 
-    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$recreatePipeline" != "true" ] && [ $? -ne 0 ]; then
+    - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ ! -f "$PIPELINE_EXISTS_FILE" ]; then
            recreatePipeline="true";
            echo "setting recreatePipeline to true";
        fi'
