@@ -90,7 +90,7 @@ script:
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
            cd ${TRAVIS_BUILD_DIR}/../sepia-deployment-scripts/aws/deployment-pipeline/check/codepipeline/;
            chmod a+x ./check_deployment_pipeline_exists.sh;
-           ./check_deployment_pipeline_exists.sh -n ${APPLICATION_NAME} -f ${PIPELINE_EXISTS_FILE};
+           ./check_deployment_pipeline_exists.sh -n ${APPLICATION_NAME} -r ${REGION} -f ${PIPELINE_EXISTS_FILE};
        fi'
 
    # If pipeline does not exist, create it anyway
