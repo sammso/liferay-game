@@ -31,7 +31,6 @@ import net.masterthought.cucumber.ReportParser;
 import net.masterthought.cucumber.json.Feature;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -39,15 +38,11 @@ import org.junit.Test;
  * @author Ruben Pulido
  */
 @CucumberOptions(features = {
-	"classpath:features/health_controller.feature",
-	"classpath:features/info_controller.feature",
-	"classpath:features/metrics.feature",
-	"classpath:features/data_sources/add_data_source.feature",
-	"classpath:features/data_sources/delete_data_source.feature",
-	"classpath:features/data_sources/get_data_source.feature",
-	"classpath:features/data_sources/update_data_source.feature"
+	"classpath:features/characters/add_character.feature",
+	"classpath:features/characters/get_character.feature",
+	"classpath:features/characters/update_character.feature",
+	"classpath:features/characters/delete_character.feature"
 })
-@Ignore
 public class AcceptanceTest {
 
 	public static final String REPORTS_LOCATION =
@@ -58,11 +53,8 @@ public class AcceptanceTest {
 		CucumberRunner.parallel(getClass(), 5, REPORTS_LOCATION);
 
 		String[] featureNames = {
-			"contacts_mapping_rule_controller",
-			"contacts_provider_entry_controller", "contacts_entry_controller",
-			"contacts_mapping_suggestion_controller",
-			"contacts_group_controller", "contacts_generation_controller",
-			"contacts_tear_down"
+			"characters/add_character", "characters/get_character",
+			"characters/update_character", "characters/delete_character"
 		};
 
 		for (String featureName : featureNames) {
@@ -104,7 +96,7 @@ public class AcceptanceTest {
 		}
 
 		Configuration config = new Configuration(
-			new File(REPORTS_LOCATION), "osb-pulpo-engine-contacts-test");
+			new File(REPORTS_LOCATION), "game-acceptance-test");
 
 		String buildNumber = System.getenv("TRAVIS_BUILD_ID");
 
