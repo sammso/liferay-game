@@ -45,9 +45,9 @@ import org.openqa.selenium.WebDriver;
 	features = "features/character_search.feature",
 	plugin = {"com.cucumber.listener.ExtentCucumberFormatter"}
 )
+@Ignore
 @RunAsClient
 @RunWith(CukeSpace.class)
-@Ignore
 public class CharacterSearchFeatureTest {
 
 	@Drone

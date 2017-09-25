@@ -265,6 +265,9 @@ public interface CharacterLocalService extends BaseLocalService,
 	public int getCharactersCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCharactersCount(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		PortletDataContext portletDataContext);
 

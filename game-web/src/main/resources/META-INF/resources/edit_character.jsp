@@ -20,7 +20,7 @@
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(gameDisplayContext.getRedirect());
 
-renderResponse.setTitle(LanguageUtil.get(request, "add-new-super-hero"));
+renderResponse.setTitle(LanguageUtil.get(request, "add-new-character"));
 
 Character character = gameDisplayContext.getCharacter();
 
