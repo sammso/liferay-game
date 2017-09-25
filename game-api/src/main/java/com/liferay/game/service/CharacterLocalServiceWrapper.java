@@ -308,6 +308,11 @@ public class CharacterLocalServiceWrapper implements CharacterLocalService,
 	}
 
 	@Override
+	public int getCharactersCount(long groupId) {
+		return _characterLocalService.getCharactersCount(groupId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return _characterLocalService.getExportActionableDynamicQuery(portletDataContext);

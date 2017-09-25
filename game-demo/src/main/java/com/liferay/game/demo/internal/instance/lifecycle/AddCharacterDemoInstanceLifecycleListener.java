@@ -28,12 +28,12 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.util.PropsValues;
 
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Eduardo Garcia
@@ -69,8 +69,8 @@ public class AddCharacterDemoInstanceLifecycleListener
 			String url = _IMAGE_RELATIVE_URL + topic + "/" + entry.getValue();
 
 			_characterLocalService.addCharacter(
-				defaultUserId, defaultGroup.getGroupId(), entry.getKey(),
-				url, serviceContext);
+				defaultUserId, defaultGroup.getGroupId(), entry.getKey(), url,
+				serviceContext);
 		}
 	}
 
@@ -82,14 +82,18 @@ public class AddCharacterDemoInstanceLifecycleListener
 	private static final String[] _GOT = {
 		"Daenerys Targaryen", "daenerys.png", "Jon Snow", "jonsnow.png",
 		"Tyrion Lannister", "tyrion.png", "Ramsay Bolton", "ramsay.png",
-		"Hodor", "hodor.png", "Oberyn Martell", "oberyn.png"};
+		"Hodor", "hodor.png", "Oberyn Martell", "oberyn.png"
+	};
 
 	private static final String[] _HEROES = {
 		"Batman", "batman_xl.png", "Captain America", "captainamerica_xl.png",
 		"Flash", "flash_xl.png", "Green Lantern", "greenlantern_xl.png",
 		"IronMan", "ironman_xl.png", "Robin", "robin_xl.png", "SpiderMan",
 		"spiderman_xl.png", "Superman", "superman_xl.png", "Wolverine",
-		"wolverine_xl.png", "WonderWoman", "wonderwoman_xl.png"};
+		"wolverine_xl.png", "WonderWoman", "wonderwoman_xl.png"
+	};
+
+	private static final String _IMAGE_RELATIVE_URL = "/o/game-web/images/";
 
 	private static final Map<String, Map<String, String>> _TOPICS;
 
@@ -101,8 +105,6 @@ public class AddCharacterDemoInstanceLifecycleListener
 
 		_TOPICS = Collections.unmodifiableMap(topics);
 	}
-
-	private static final String _IMAGE_RELATIVE_URL = "/o/game-web/images/";
 
 	@Reference
 	private CharacterLocalService _characterLocalService;

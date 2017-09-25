@@ -26,6 +26,13 @@ allprojects {
 }
 
 configure(subprojects.findAll {!it.childProjects}) {
+	node {
+		nodeVersion "8.1.0"
+		npmVersion "5.3.0"
+	}
+}
+
+configure(subprojects.findAll {!it.childProjects && !it.name.contains('theme')}) {
 	liferay {
 		deployDir = new File(getLiferayDeployDir())
 	}
@@ -137,7 +144,7 @@ task runDocker(type: Exec) {
 			'-p', "${project.getProperty('portal.port')}:8080",
 			'-p', '11311:11311',
 			'-p', '8099:8099',
-			'-v', "${getLiferayDeployDir()}:/usr/local/liferay-ce-portal-7.0-ga4/osgi/modules/",
+			'-v', "${getLiferayDeployDir()}:/usr/local/liferay-ce-portal-7.0-ga4/deploy/",
 			'-d',
 			'--name', "liferay-portal",
 			getImageNameWithUserAndVersion()

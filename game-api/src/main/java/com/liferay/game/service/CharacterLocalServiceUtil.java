@@ -296,6 +296,10 @@ public class CharacterLocalServiceUtil {
 		return getService().getCharactersCount();
 	}
 
+	public static int getCharactersCount(long groupId) {
+		return getService().getCharactersCount(groupId);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return getService().getExportActionableDynamicQuery(portletDataContext);

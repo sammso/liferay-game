@@ -61,7 +61,7 @@ public class GameDisplayContext {
 			return _displayStyle;
 		}
 
-		_displayStyle = ParamUtil.getString(_request, "displayStyle", "list");
+		_displayStyle = ParamUtil.getString(_request, "displayStyle", "icon");
 
 		return _displayStyle;
 	}
@@ -122,7 +122,7 @@ public class GameDisplayContext {
 		_searchContainer = new SearchContainer(
 			_portletRequest, PortletURLUtil.clone(
 				getPortletURL(), _portletResponse),
-			null, LanguageUtil.get(_request, "no-super-hero-were-found"));
+			null, LanguageUtil.get(_request, "no-characters-were-found"));
 
 		_searchContainer.setRowChecker(
 			new EmptyOnClickRowChecker(_portletResponse));
@@ -133,7 +133,9 @@ public class GameDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		_searchContainer.setTotal(_getTotal());
+		_searchContainer.setTotal(
+			CharacterLocalServiceUtil.getCharactersCount(
+				themeDisplay.getScopeGroupId()));
 		_searchContainer.setResults(
 			CharacterLocalServiceUtil.getCharacters(
 				themeDisplay.getScopeGroupId(),
@@ -142,15 +144,7 @@ public class GameDisplayContext {
 		return _searchContainer;
 	}
 
-	private int _getTotal() {
-		return _names.length;
-	}
-
 	private String _displayStyle;
-	private String[] _names = {
-		"Batman", "Captain America", "Flash", "Green Lantern", "IronMan",
-		"Robin", "SpiderMan", "Superman", "Wolverine", "WonderWoman"
-	};
 	private String _orderByCol;
 	private String _orderByType;
 	private final LiferayPortletRequest _portletRequest;
@@ -158,9 +152,5 @@ public class GameDisplayContext {
 	private String _redirect;
 	private final HttpServletRequest _request;
 	private SearchContainer _searchContainer;
-	private String[] _urls = {
-		"batman", "captainamerica", "flash", "greenlantern", "ironman", "robin",
-		"spiderman", "superman", "wolverine", "wonderwoman"
-	};
 
 }
