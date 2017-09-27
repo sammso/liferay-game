@@ -50,7 +50,6 @@ public class AcceptanceTest {
 
 	@Test
 	public void testAllEndpoints() throws IOException {
-		CucumberRunner.parallel(getClass(), 4, REPORTS_LOCATION);
 
 		String[] featureNames = {
 			"characters/add_character", "characters/get_character",
