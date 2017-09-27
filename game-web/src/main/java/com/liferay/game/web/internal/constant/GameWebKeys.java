@@ -21,4 +21,8 @@ public class GameWebKeys {
 
 	public static final String GAME_CHARACTER = "GAME_CHARACTER";
 
+	public static final String KILL_CHARACTER = "KILL_CHARACTER";
+
+	public static final String REVIVE_CHARACTER = "REVIVE_CHARACTER";
+
 }

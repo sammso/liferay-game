@@ -100,7 +100,20 @@
 								resultRow="<%= row %>"
 								rowChecker="<%= searchContainer.getRowChecker() %>"
 								title="<%= character.getName() %>"
-							/>
+							>
+								<%--<liferay-frontend:vertical-card-footer>
+									<aui:workflow-status markupView="lexicon" showIcon="<%= false %>" statusMessage="<%= character.getStatus() %>" />
+								</liferay-frontend:vertical-card-footer>
+--%>
+
+								<c:if test="<%= Objects.equals(character.getStatus(), CharacterStatus.DEAD.toString()) %>">
+									<liferay-frontend:vertical-card-sticker-bottom>
+										<div class="sticker sticker-bottom sticker-danger">
+											<%= character.getStatus() %>
+										</div>
+									</liferay-frontend:vertical-card-sticker-bottom>
+								</c:if>
+							</liferay-frontend:vertical-card>
 						</liferay-ui:search-container-column-text>
 					</c:when>
 				</c:choose>

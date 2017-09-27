@@ -34,6 +34,32 @@ Character character = (Character)row.getObject();
 		url="<%= editCharacterURL %>"
 	/>
 
+	<c:if test="<%= Objects.equals(character.getStatus(), CharacterStatus.DEAD.toString()) %>">
+		<portlet:actionURL name="/game/edit_character" var="reviveCharacterURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= GameWebKeys.REVIVE_CHARACTER %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="characterId" value="<%= String.valueOf(character.getCharacterId()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon
+			message="revive"
+			url="<%= reviveCharacterURL %>"
+		/>
+	</c:if>
+
+	<c:if test="<%= Objects.equals(character.getStatus(), CharacterStatus.ALIVE.toString()) %>">
+		<portlet:actionURL name="/game/edit_character" var="killCharacterURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= GameWebKeys.KILL_CHARACTER %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="characterId" value="<%= String.valueOf(character.getCharacterId()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon
+			message="kill"
+			url="<%= killCharacterURL %>"
+		/>
+	</c:if>
+
 	<portlet:actionURL name="/game/edit_character" var="deleteCharacterURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
