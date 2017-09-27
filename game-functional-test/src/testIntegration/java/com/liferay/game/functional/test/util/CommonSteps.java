@@ -132,6 +132,21 @@ public class CommonSteps {
 		input.sendKeys(value);
 	}
 
+	public static void reviveCharacter(
+		WebDriver browser, String characterName) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Reviving Character  " + characterName);
+		}
+
+		clickOnCharacterAction(browser, characterName, "Revive");
+
+		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+			browser,
+			By.xpath(
+				"//*[contains(., 'Your request completed successfully.')]"));
+	}
+
 	public static void slayCharacter(WebDriver browser, String characterName) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Slaying Character  " + characterName);
@@ -139,7 +154,7 @@ public class CommonSteps {
 
 		clickOnCharacterAction(browser, characterName, "Kill");
 
-		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+		FunctionalTestLocatorsHelper.waitForElementToBeClickable(
 			browser,
 			By.xpath(
 				"//*[contains(., 'Your request completed successfully.')]"));

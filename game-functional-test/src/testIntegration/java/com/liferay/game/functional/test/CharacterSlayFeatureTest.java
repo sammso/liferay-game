@@ -95,8 +95,12 @@ public class CharacterSlayFeatureTest {
 		String stickerLocator =
 			"//*[contains(@class,'sticker')][contains(.,'DEAD')]";
 
-		FunctionalTestLocatorsHelper.waitForElementNotToBeVisible(
-			browser, By.xpath(cardLocator + stickerLocator));
+		WebElement deadSticker = FunctionalTestLocatorsHelper.fetchElement(
+			browser, By.xpath(cardLocator), By.xpath(stickerLocator));
+
+		if (deadSticker != null) {
+			CommonSteps.reviveCharacter(browser, characterName);
+		}
 	}
 
 	@Then("^(.+) is dead$")
