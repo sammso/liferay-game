@@ -80,9 +80,10 @@ public class AddCharacterDemoInstanceLifecycleListener
 	}
 
 	private static final String[] _GOT = {
-		"Daenerys Targaryen", "daenerys.png", "Jon Snow", "jonsnow.png",
-		"Tyrion Lannister", "tyrion.png", "Ramsay Bolton", "ramsay.png",
-		"Hodor", "hodor.png", "Oberyn Martell", "oberyn.png"
+		"Daenerys Targaryen", "daenerystargaryen.png", "Jon Snow",
+		"jonsnow.png", "Tyrion Lannister", "tyrionlannister.png",
+		"Ramsay Bolton", "ramsaybolton.png", "Hodor", "hodor.png",
+		"Oberyn Martell", "oberynmartell.png"
 	};
 
 	private static final String[] _HEROES = {
