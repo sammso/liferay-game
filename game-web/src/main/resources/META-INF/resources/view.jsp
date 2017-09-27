@@ -99,6 +99,7 @@
 							<liferay-frontend:vertical-card
 								actionJsp="/character_action.jsp"
 								actionJspServletContext="<%= application %>"
+								cssClass='<%= "status-" + character.getStatus() %>'
 								imageUrl="<%= character.getUrl() %>"
 								resultRow="<%= row %>"
 								rowChecker="<%= searchContainer.getRowChecker() %>"
