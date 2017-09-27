@@ -340,6 +340,18 @@ public class CharacterLocalServiceWrapper implements CharacterLocalService,
 		return _characterLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public com.liferay.game.model.Character killCharacter(long characterId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _characterLocalService.killCharacter(characterId);
+	}
+
+	@Override
+	public com.liferay.game.model.Character reviveCharacter(long characterId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _characterLocalService.reviveCharacter(characterId);
+	}
+
 	/**
 	* Updates the character in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

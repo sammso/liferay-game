@@ -324,6 +324,18 @@ public class CharacterLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static com.liferay.game.model.Character killCharacter(
+		long characterId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().killCharacter(characterId);
+	}
+
+	public static com.liferay.game.model.Character reviveCharacter(
+		long characterId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().reviveCharacter(characterId);
+	}
+
 	/**
 	* Updates the character in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

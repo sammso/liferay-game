@@ -82,7 +82,8 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
-			{ "url", Types.VARCHAR }
+			{ "url", Types.VARCHAR },
+			{ "status", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -97,9 +98,10 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("url", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("status", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Game_Character (uuid_ VARCHAR(75) null,characterId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Game_Character (uuid_ VARCHAR(75) null,characterId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url VARCHAR(75) null,status VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Game_Character";
 	public static final String ORDER_BY_JPQL = " ORDER BY character.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Game_Character.name ASC";
@@ -143,6 +145,7 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
 		model.setUrl(soapModel.getUrl());
+		model.setStatus(soapModel.getStatus());
 
 		return model;
 	}
@@ -217,6 +220,7 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("url", getUrl());
+		attributes.put("status", getStatus());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -284,6 +288,12 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 
 		if (url != null) {
 			setUrl(url);
+		}
+
+		String status = (String)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -473,6 +483,22 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 		_url = url;
 	}
 
+	@JSON
+	@Override
+	public String getStatus() {
+		if (_status == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _status;
+		}
+	}
+
+	@Override
+	public void setStatus(String status) {
+		_status = status;
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -520,6 +546,7 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 		characterImpl.setModifiedDate(getModifiedDate());
 		characterImpl.setName(getName());
 		characterImpl.setUrl(getUrl());
+		characterImpl.setStatus(getStatus());
 
 		characterImpl.resetOriginalValues();
 
@@ -657,12 +684,20 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 			characterCacheModel.url = null;
 		}
 
+		characterCacheModel.status = getStatus();
+
+		String status = characterCacheModel.status;
+
+		if ((status != null) && (status.length() == 0)) {
+			characterCacheModel.status = null;
+		}
+
 		return characterCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -684,6 +719,8 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 		sb.append(getName());
 		sb.append(", url=");
 		sb.append(getUrl());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -691,7 +728,7 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.game.model.Character");
@@ -737,6 +774,10 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 			"<column><column-name>url</column-name><column-value><![CDATA[");
 		sb.append(getUrl());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -763,6 +804,7 @@ public class CharacterModelImpl extends BaseModelImpl<Character>
 	private boolean _setModifiedDate;
 	private String _name;
 	private String _url;
+	private String _status;
 	private long _columnBitmask;
 	private Character _escapedModel;
 }

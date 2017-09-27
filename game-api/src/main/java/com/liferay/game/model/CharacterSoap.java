@@ -44,6 +44,7 @@ public class CharacterSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setUrl(model.getUrl());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -176,6 +177,14 @@ public class CharacterSoap implements Serializable {
 		_url = url;
 	}
 
+	public String getStatus() {
+		return _status;
+	}
+
+	public void setStatus(String status) {
+		_status = status;
+	}
+
 	private String _uuid;
 	private long _characterId;
 	private long _groupId;
@@ -186,4 +195,5 @@ public class CharacterSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private String _url;
+	private String _status;
 }

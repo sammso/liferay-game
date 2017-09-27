@@ -143,6 +143,8 @@ public class CharacterPersistenceTest {
 
 		newCharacter.setUrl(RandomTestUtil.randomString());
 
+		newCharacter.setStatus(RandomTestUtil.randomString());
+
 		_characters.add(_persistence.update(newCharacter));
 
 		Character existingCharacter = _persistence.findByPrimaryKey(newCharacter.getPrimaryKey());
@@ -166,6 +168,8 @@ public class CharacterPersistenceTest {
 			Time.getShortTimestamp(newCharacter.getModifiedDate()));
 		Assert.assertEquals(existingCharacter.getName(), newCharacter.getName());
 		Assert.assertEquals(existingCharacter.getUrl(), newCharacter.getUrl());
+		Assert.assertEquals(existingCharacter.getStatus(),
+			newCharacter.getStatus());
 	}
 
 	@Test
@@ -228,7 +232,7 @@ public class CharacterPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("Game_Character", "uuid",
 			true, "characterId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "name", true, "url", true);
+			"modifiedDate", true, "name", true, "url", true, "status", true);
 	}
 
 	@Test
@@ -461,6 +465,8 @@ public class CharacterPersistenceTest {
 		character.setName(RandomTestUtil.randomString());
 
 		character.setUrl(RandomTestUtil.randomString());
+
+		character.setStatus(RandomTestUtil.randomString());
 
 		_characters.add(_persistence.update(character));
 

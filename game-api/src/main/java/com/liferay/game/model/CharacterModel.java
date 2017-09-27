@@ -240,6 +240,21 @@ public interface CharacterModel extends BaseModel<Character>, GroupedModel,
 	 */
 	public void setUrl(String url);
 
+	/**
+	 * Returns the status of this character.
+	 *
+	 * @return the status of this character
+	 */
+	@AutoEscape
+	public String getStatus();
+
+	/**
+	 * Sets the status of this character.
+	 *
+	 * @param status the status of this character
+	 */
+	public void setStatus(String status);
+
 	@Override
 	public boolean isNew();
 

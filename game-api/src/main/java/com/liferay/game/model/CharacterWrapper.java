@@ -69,6 +69,7 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("url", getUrl());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -133,6 +134,12 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 
 		if (url != null) {
 			setUrl(url);
+		}
+
+		String status = (String)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -224,6 +231,16 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _character.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the status of this character.
+	*
+	* @return the status of this character
+	*/
+	@Override
+	public java.lang.String getStatus() {
+		return _character.getStatus();
 	}
 
 	/**
@@ -400,6 +417,16 @@ public class CharacterWrapper implements Character, ModelWrapper<Character> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_character.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the status of this character.
+	*
+	* @param status the status of this character
+	*/
+	@Override
+	public void setStatus(java.lang.String status) {
+		_character.setStatus(status);
 	}
 
 	/**

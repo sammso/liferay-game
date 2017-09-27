@@ -66,7 +66,7 @@ public class CharacterCacheModel implements CacheModel<Character>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -88,6 +88,8 @@ public class CharacterCacheModel implements CacheModel<Character>,
 		sb.append(name);
 		sb.append(", url=");
 		sb.append(url);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -144,6 +146,13 @@ public class CharacterCacheModel implements CacheModel<Character>,
 			characterImpl.setUrl(url);
 		}
 
+		if (status == null) {
+			characterImpl.setStatus(StringPool.BLANK);
+		}
+		else {
+			characterImpl.setStatus(status);
+		}
+
 		characterImpl.resetOriginalValues();
 
 		return characterImpl;
@@ -165,6 +174,7 @@ public class CharacterCacheModel implements CacheModel<Character>,
 		modifiedDate = objectInput.readLong();
 		name = objectInput.readUTF();
 		url = objectInput.readUTF();
+		status = objectInput.readUTF();
 	}
 
 	@Override
@@ -208,6 +218,13 @@ public class CharacterCacheModel implements CacheModel<Character>,
 		else {
 			objectOutput.writeUTF(url);
 		}
+
+		if (status == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(status);
+		}
 	}
 
 	public String uuid;
@@ -220,4 +237,5 @@ public class CharacterCacheModel implements CacheModel<Character>,
 	public long modifiedDate;
 	public String name;
 	public String url;
+	public String status;
 }
