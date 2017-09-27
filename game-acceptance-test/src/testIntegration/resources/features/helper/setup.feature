@@ -46,4 +46,4 @@ Feature: Setup greature: Get userId, groupId and companyId and authenticate
 
 	Scenario: Authenticate
 
-		* def authHeaderValue = callonce read('../../plugins/basic-auth.js') creds
+		* def authHeaderValue = call read('../../plugins/basic-auth.js') creds

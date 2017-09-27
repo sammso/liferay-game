@@ -37,9 +37,6 @@ import org.junit.Test;
  * @author Julio Camarero
  * @author Ruben Pulido
  */
-@CucumberOptions(features = {
-	"classpath:features/characters/add_character.feature"
-})
 public class AcceptanceTest {
 
 	public static final String REPORTS_LOCATION =
@@ -47,9 +44,11 @@ public class AcceptanceTest {
 
 	@Test
 	public void testAllEndpoints() throws IOException {
-		CucumberRunner.parallel(getClass(), 4, REPORTS_LOCATION);
 
-		String[] featureNames = {"characters/add_character"};
+		String[] featureNames = {
+			"characters/add_character", "characters/get_character",
+			"characters/update_character", "characters/delete_character"
+		};
 
 		for (String featureName : featureNames) {
 			File file = new File(
