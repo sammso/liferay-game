@@ -47,6 +47,8 @@
 	</liferay-frontend:management-bar-filters>
 
 	<liferay-frontend:management-bar-action-buttons>
+		<liferay-frontend:management-bar-button href="javascript:;" icon="cut" id="killCharacters" label="kill" />
+		<liferay-frontend:management-bar-button href="javascript:;" icon="magic" id="reviveCharacters" label="revive" />
 		<liferay-frontend:management-bar-button href="javascript:;" icon="trash" id="deleteCharacters" label="delete" />
 	</liferay-frontend:management-bar-action-buttons>
 
@@ -60,12 +62,13 @@
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280">
-	<portlet:actionURL name="/game/edit_character" var="deleteCharactersURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+	<portlet:actionURL name="/game/edit_character" var="editCharactersURL">
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:actionURL>
 
-	<aui:form action="<%= deleteCharactersURL %>" name="fm">
+	<aui:form action="<%= editCharactersURL %>" name="fm">
+		<aui:input type="hidden" name="<%= Constants.CMD %>" value="" />
+
 		<liferay-ui:search-container
 			id="characters"
 			searchContainer="<%= gameDisplayContext.getSearchContainer() %>"
@@ -131,8 +134,28 @@
 		'click',
 		function() {
 			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.DELETE %>';
+
 				submitForm($(document.<portlet:namespace />fm));
 			}
+		}
+	);
+
+	$('#<portlet:namespace />killCharacters').on(
+		'click',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= GameWebKeys.KILL_CHARACTER %>';
+
+			submitForm($(document.<portlet:namespace />fm));
+		}
+	);
+
+	$('#<portlet:namespace />reviveCharacters').on(
+		'click',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= GameWebKeys.REVIVE_CHARACTER %>';
+
+			submitForm($(document.<portlet:namespace />fm));
 		}
 	);
 </aui:script>
