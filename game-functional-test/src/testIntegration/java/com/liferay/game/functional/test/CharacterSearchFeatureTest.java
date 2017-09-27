@@ -14,6 +14,8 @@
 
 package com.liferay.game.functional.test;
 
+import com.liferay.game.functional.test.util.CommonSteps;
+import com.liferay.game.functional.test.util.FunctionalTestLocatorsHelper;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
 
 import cucumber.api.CucumberOptions;
@@ -36,6 +38,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -68,6 +71,7 @@ public class CharacterSearchFeatureTest {
 
 	@Then("^I see (.+) in the list of characters$")
 	public void findCharacter(String characterName) {
+		CommonSteps.findCharacter(browser, characterName);
 	}
 
 	@Given("^I am in the list of characters$")
@@ -77,6 +81,12 @@ public class CharacterSearchFeatureTest {
 
 	@When("^I search for (.+)$")
 	public void searchCharacters(String keywords) {
+		CommonSteps.introduceValueInInput(
+			browser, "_com_liferay_game_web_portlet_GamePortlet_keywords",
+			keywords);
+
+		FunctionalTestLocatorsHelper.clickElement(
+			browser, By.xpath("//button[@data-qa-id='searchButton']"));
 	}
 
 	@After
@@ -88,6 +98,9 @@ public class CharacterSearchFeatureTest {
 
 	@Then("^a character called (.+) exists")
 	public void verifyExistsCharacter(String characterName) {
+		navigateToListOfCharacters();
+
+		CommonSteps.addCharacterIfItDoesNotExist(browser, characterName);
 	}
 
 	@ArquillianResource

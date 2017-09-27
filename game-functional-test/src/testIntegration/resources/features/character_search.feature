@@ -6,17 +6,17 @@ Feature: Search of Characters
 
         Given a character called "Arya Stark" exists
         When I search for Arya
-        Then I see Arya Stark in the list of results
+        Then I see Arya Stark in the list of characters
 
     Scenario: Search a character by family name (Arya)
 
         Given a character called "Arya Stark" exists
         When I search for Stark
-        Then I see Arya Stark in the list of results
+        Then I see Arya Stark in the list of characters
 
     Scenario: Search a character by house
 
         Given a character called "Arya Stark" exists
-        When I search for Winterfell
-        Then I see Arya Stark in the list of results
+        When I search for alive
+        Then I see Arya Stark in the list of characters
         
