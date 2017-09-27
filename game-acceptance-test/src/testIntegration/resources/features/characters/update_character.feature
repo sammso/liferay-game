@@ -7,7 +7,7 @@ Feature: Updating existing Characters
 		* def characterUrl = 'https://en.wikipedia.org/wiki/File:Robb_Stark-Richard_Madden.jpg'
 		* def updatedCharacterUrl = 'https://en.wikipedia.org/wiki/File:Robb_Stark-Richard_Madden2.jpg'
 
-		* def setupReponse = callonce read('../helper/setup.feature')
+		* def setupReponse = call read('../helper/setup.feature')
 
 		* def authHeaderValue = setupReponse.authHeaderValue
 		* def companyId = setupReponse.companyId

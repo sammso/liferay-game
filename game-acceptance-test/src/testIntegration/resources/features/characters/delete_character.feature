@@ -5,7 +5,7 @@ Feature: Deleting Characters
 		* def characterName = 'Robb Stark'
 		* def characterUrl = 'https://en.wikipedia.org/wiki/File:Robb_Stark-Richard_Madden.jpg'
 
-		* def setupReponse = callonce read('../helper/setup.feature')
+		* def setupReponse = call read('../helper/setup.feature')
 
 		* def authHeaderValue = setupReponse.authHeaderValue
 		* def companyId = setupReponse.companyId
