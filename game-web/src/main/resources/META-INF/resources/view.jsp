@@ -67,7 +67,7 @@
 	</portlet:actionURL>
 
 	<aui:form action="<%= editCharactersURL %>" name="fm">
-		<aui:input type="hidden" name="<%= Constants.CMD %>" value="" />
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
 
 		<liferay-ui:search-container
 			id="characters"

@@ -57,33 +57,6 @@ public class EditCharacterMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	protected long[] getCharacterIds(ActionRequest actionRequest) {
-		long[] characterIds = null;
-
-		long characterId = ParamUtil.getLong(actionRequest, "characterId");
-
-		if (characterId > 0) {
-			return new long[] {characterId};
-		}
-		return ParamUtil.getLongValues(actionRequest, "rowIds");
-	}
-
-	protected void killCharacters(ActionRequest actionRequest)
-		throws PortalException {
-
-		for (long characterId : getCharacterIds(actionRequest)) {
-			_characterLocalService.killCharacter(characterId);
-		}
-	}
-
-	protected void reviveCharacters(ActionRequest actionRequest)
-		throws PortalException {
-
-		for (long characterId : getCharacterIds(actionRequest)) {
-			_characterLocalService.reviveCharacter(characterId);
-		}
-	}
-
 	@Override
 	protected void doProcessAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -117,6 +90,32 @@ public class EditCharacterMVCActionCommand extends BaseMVCActionCommand {
 			else {
 				throw e;
 			}
+		}
+	}
+
+	protected long[] getCharacterIds(ActionRequest actionRequest) {
+		long characterId = ParamUtil.getLong(actionRequest, "characterId");
+
+		if (characterId > 0) {
+			return new long[] {characterId};
+		}
+
+		return ParamUtil.getLongValues(actionRequest, "rowIds");
+	}
+
+	protected void killCharacters(ActionRequest actionRequest)
+		throws PortalException {
+
+		for (long characterId : getCharacterIds(actionRequest)) {
+			_characterLocalService.killCharacter(characterId);
+		}
+	}
+
+	protected void reviveCharacters(ActionRequest actionRequest)
+		throws PortalException {
+
+		for (long characterId : getCharacterIds(actionRequest)) {
+			_characterLocalService.reviveCharacter(characterId);
 		}
 	}
 
