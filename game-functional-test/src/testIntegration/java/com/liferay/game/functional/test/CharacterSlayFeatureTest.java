@@ -33,7 +33,6 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -62,16 +61,8 @@ public class CharacterSlayFeatureTest {
 		FunctionalTestUtil.createReport();
 	}
 
-	@AfterClass
-	public static void tearDownClass() {
-	}
-
 	@Then("^I can't slay (.+)$")
 	public void cantSlayCharacter(String characterName) {
-	}
-
-	protected void navigateToListOfCharacters() {
-		browser.get(_url.toExternalForm());
 	}
 
 	@Given("^I slay (.+)$")
@@ -93,7 +84,22 @@ public class CharacterSlayFeatureTest {
 
 			Assert.fail("I shouldn't be able to slay this character.");
 		}
-		catch(ElementNotVisibleException e) {
+		catch (ElementNotVisibleException enve) {
+		}
+	}
+
+	@And("^(.+) is alive")
+	public void verifyAliveCharacter(String characterName) {
+		String cardLocator = "//*[contains(@class,'card-row')][contains(.,'" +
+			characterName + "')]";
+		String stickerLocator =
+			"//*[contains(@class,'sticker')][contains(.,'DEAD')]";
+
+		WebElement deadSticker = FunctionalTestLocatorsHelper.fetchElement(
+			browser, By.xpath(cardLocator), By.xpath(stickerLocator));
+
+		if (deadSticker != null) {
+			CommonSteps.reviveCharacter(browser, characterName);
 		}
 	}
 
@@ -106,29 +112,15 @@ public class CharacterSlayFeatureTest {
 			By.xpath("//*[contains(@class,'sticker')][contains(.,'DEAD')]"));
 	}
 
-	@And("^(.+) is alive")
-	public void verifyAliveCharacter(String characterName) {
-		String cardLocator = "//*[contains(@class,'card-row')][contains(.,'" +
-			characterName + "')]";
-		String stickerLocator =
-			"//*[contains(@class,'sticker')][contains(.,'DEAD')]";
-
-		FunctionalTestLocatorsHelper.waitForElementNotToBeVisible(
-			browser, By.xpath(cardLocator + stickerLocator));
-	}
-
 	@Given("^a character called (.+) exists$")
 	public void verifyExistsCharacter(String characterName) {
 		navigateToListOfCharacters();
 
-		WebElement character = CommonSteps.fetchCharacter(
-			browser, characterName);
+		CommonSteps.addCharacterIfItDoesNotExist(browser, characterName);
+	}
 
-		if (character != null) {
-			return;
-		}
-
-		CommonSteps.addCharacter(browser, characterName);
+	protected void navigateToListOfCharacters() {
+		browser.get(_url.toExternalForm());
 	}
 
 	@ArquillianResource

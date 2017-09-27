@@ -34,12 +34,10 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * @author Julio Camarero
@@ -60,10 +58,6 @@ public class CharacterCreationFeatureTest {
 		FunctionalTestUtil.createReport();
 	}
 
-	@AfterClass
-	public static void tearDownClass() {
-	}
-
 	@When("^I add a new character called (.+)$")
 	public void addCharacter(String characterName) {
 		CommonSteps.addCharacter(browser, characterName);
@@ -76,10 +70,6 @@ public class CharacterCreationFeatureTest {
 
 	@Then("^I can't save the character")
 	public void cantSaveCharacter() {
-	}
-
-	@And("^I don't see (.+) in the list of characters$")
-	public void dontFind(String characterName) {
 	}
 
 	@Then("^I see (.+) in the list of characters$")
@@ -101,14 +91,7 @@ public class CharacterCreationFeatureTest {
 
 	@And("^(.+) doesn't exist$")
 	public void verifyDoesntExist(String characterName) {
-		WebElement character = CommonSteps.fetchCharacter(
-			browser, characterName);
-
-		if (character == null) {
-			return;
-		}
-
-		CommonSteps.deleteCharacter(browser, characterName);
+		CommonSteps.addCharacterIfItDoesNotExist(browser, characterName);
 	}
 
 	@ArquillianResource
