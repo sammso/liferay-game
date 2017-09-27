@@ -49,8 +49,8 @@ public class AcceptanceTest {
 		"build/reports/tests/testIntegration/cucumber/";
 
 	@Test
-	public void testAllControllers() throws IOException {
-		CucumberRunner.parallel(getClass(), 5, REPORTS_LOCATION);
+	public void testAllEndpoints() throws IOException {
+		CucumberRunner.parallel(getClass(), 4, REPORTS_LOCATION);
 
 		String[] featureNames = {
 			"characters/add_character", "characters/get_character",
@@ -147,6 +147,11 @@ public class AcceptanceTest {
 		}
 
 		boolean success = featureOverviewHtml.renameTo(indexHtml);
+
+		System.out.println("");
+		System.out.println("#################################################");
+		System.out.println(String.format("Test Results: %s. ", indexHtml));
+		System.out.println("#################################################");
 
 		if (!success) {
 			throw new RuntimeException(
