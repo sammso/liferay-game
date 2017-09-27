@@ -20,7 +20,7 @@
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
-		<aui:nav-item href="<%= mainURL.toString() %>" label="super-hero" selected="<%= true %>" />
+		<aui:nav-item href="<%= mainURL.toString() %>" label="characters" selected="<%= true %>" />
 	</aui:nav>
 
 	<aui:nav-bar-search>
@@ -30,7 +30,7 @@
 
 <liferay-frontend:management-bar
 	includeCheckBox="<%= true %>"
-	searchContainerId="superHeros"
+	searchContainerId="characters"
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
@@ -41,7 +41,7 @@
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= gameDisplayContext.getOrderByCol() %>"
 			orderByType="<%= gameDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"title"} %>'
+			orderColumns='<%= new String[] {"name"} %>'
 			portletURL="<%= PortletURLUtil.clone(mainURL, liferayPortletResponse) %>"
 		/>
 	</liferay-frontend:management-bar-filters>
@@ -67,7 +67,7 @@
 
 	<aui:form action="<%= deleteCharactersURL %>" name="fm">
 		<liferay-ui:search-container
-			id="superHeros"
+			id="characters"
 			searchContainer="<%= gameDisplayContext.getSearchContainer() %>"
 		>
 			<liferay-ui:search-container-row
@@ -101,11 +101,6 @@
 								rowChecker="<%= searchContainer.getRowChecker() %>"
 								title="<%= character.getName() %>"
 							>
-								<%--<liferay-frontend:vertical-card-footer>
-									<aui:workflow-status markupView="lexicon" showIcon="<%= false %>" statusMessage="<%= character.getStatus() %>" />
-								</liferay-frontend:vertical-card-footer>
---%>
-
 								<c:if test="<%= Objects.equals(character.getStatus(), CharacterStatus.DEAD.toString()) %>">
 									<liferay-frontend:vertical-card-sticker-bottom>
 										<div class="sticker sticker-bottom sticker-danger">
