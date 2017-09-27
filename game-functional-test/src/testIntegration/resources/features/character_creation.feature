@@ -5,6 +5,7 @@ Feature: Creation of Characters
     Scenario: Adding a new Character (Arya)
 
         Given I am in the list of characters
+        And Arya Stark doesn't exist
         When I add a new character called Arya Stark
         Then I see Arya Stark in the list of characters
 

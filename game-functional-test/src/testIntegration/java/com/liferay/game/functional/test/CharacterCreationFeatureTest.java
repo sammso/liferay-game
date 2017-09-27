@@ -14,6 +14,7 @@
 
 package com.liferay.game.functional.test;
 
+import com.liferay.game.functional.test.util.CommonSteps;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
 
 import cucumber.api.CucumberOptions;
@@ -38,6 +39,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * @author Julio Camarero
@@ -64,6 +66,7 @@ public class CharacterCreationFeatureTest {
 
 	@When("^I add a new character called (.+)$")
 	public void addCharacter(String characterName) {
+		CommonSteps.addCharacter(browser, characterName);
 	}
 
 	@But("^I add a new character without a name$")
@@ -81,6 +84,7 @@ public class CharacterCreationFeatureTest {
 
 	@Then("^I see (.+) in the list of characters$")
 	public void findCharacter(String characterName) {
+		CommonSteps.findCharacter(browser, characterName);
 	}
 
 	@Given("^I am in the list of characters$")
@@ -93,6 +97,18 @@ public class CharacterCreationFeatureTest {
 		FunctionalTestUtil.checkJavascriptErrors(browser);
 
 		FunctionalTestUtil.takeScreenshot(scenario, browser);
+	}
+
+	@And("^(.+) doesn't exist$")
+	public void verifyDoesntExist(String characterName) {
+		WebElement character = CommonSteps.fetchCharacter(
+			browser, characterName);
+
+		if (character == null) {
+			return;
+		}
+
+		CommonSteps.deleteCharacter(browser, characterName);
 	}
 
 	@ArquillianResource
