@@ -33,10 +33,8 @@ public class CommonSteps {
 			_log.debug("Adding Character  " + characterName);
 		}
 
-		WebElement addLink = FunctionalTestLocatorsHelper.getClickableElement(
+		FunctionalTestLocatorsHelper.clickElement(
 			browser, By.xpath("//a[@data-original-title='Add new Character']"));
-
-		addLink.click();
 
 		CommonSteps.introduceValueInInput(
 			browser, "_com_liferay_game_web_portlet_GamePortlet_name",
@@ -51,11 +49,8 @@ public class CommonSteps {
 		CommonSteps.introduceValueInInput(
 			browser, "_com_liferay_game_web_portlet_GamePortlet_url", imageURL);
 
-		WebElement submitButton =
-			FunctionalTestLocatorsHelper.getClickableElement(
-				browser, By.xpath("//button[@type='submit']"));
-
-		submitButton.click();
+		FunctionalTestLocatorsHelper.clickElement(
+			browser, By.xpath("//button[@type='submit']"));
 
 		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
 			browser,
@@ -150,8 +145,23 @@ public class CommonSteps {
 
 		actionsLink.click();
 
-		WebElement actionLink = FunctionalTestLocatorsHelper.getElement(
-			browser, By.xpath("//a[contains(.,'" + action + "')]"));
+		String menuId = actionsLink.getAttribute("id");
+
+		System.out.println("menuId: " + menuId);
+
+		WebElement actionsMenu =
+			FunctionalTestLocatorsHelper.getClickableElement(
+				browser, By.xpath("//*[@aria-labelledby='" + menuId +"']"));
+
+		System.out.println("actionsMenu: " + "//*[@aria-labelledby='" + menuId +"']");
+
+
+		WebElement actionLink = actionsMenu.findElement(
+			By.xpath("//a[contains(.,'" + action + "')]"));
+
+		System.out.println("actionsLink: " + "//a[contains(.,'" + action + "')]");
+
+
 
 		actionLink.click();
 	}

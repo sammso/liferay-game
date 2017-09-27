@@ -6,6 +6,7 @@ Feature: Slay of Characters
     Scenario: Slaying a Character (Jon)
 
         Given a character called Jon Snow exists
+        And Jon Snow is alive
         When I slay Jon Snow
         Then Jon Snow is dead
 

@@ -15,11 +15,13 @@
 package com.liferay.game.functional.test;
 
 import com.liferay.game.functional.test.util.CommonSteps;
+import com.liferay.game.functional.test.util.FunctionalTestLocatorsHelper;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -32,10 +34,12 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -66,8 +70,7 @@ public class CharacterSlayFeatureTest {
 	public void cantSlayCharacter(String characterName) {
 	}
 
-	@Given("^I am in the list of characters$")
-	public void navigateToListOfCharacters() {
+	protected void navigateToListOfCharacters() {
 		browser.get(_url.toExternalForm());
 	}
 
@@ -85,7 +88,13 @@ public class CharacterSlayFeatureTest {
 
 	@Given("^I try to slay (.+)$")
 	public void tryToSlayCharacter(String characterName) {
-		CommonSteps.slayCharacter(browser, characterName);
+		try {
+			CommonSteps.slayCharacter(browser, characterName);
+
+			Assert.fail("I shouldn't be able to slay this character.");
+		}
+		catch(ElementNotVisibleException e) {
+		}
 	}
 
 	@Then("^(.+) is dead$")
@@ -97,8 +106,21 @@ public class CharacterSlayFeatureTest {
 			By.xpath("//*[contains(@class,'sticker')][contains(.,'DEAD')]"));
 	}
 
+	@And("^(.+) is alive")
+	public void verifyAliveCharacter(String characterName) {
+		String cardLocator = "//*[contains(@class,'card-row')][contains(.,'" +
+			characterName + "')]";
+		String stickerLocator =
+			"//*[contains(@class,'sticker')][contains(.,'DEAD')]";
+
+		FunctionalTestLocatorsHelper.waitForElementNotToBeVisible(
+			browser, By.xpath(cardLocator + stickerLocator));
+	}
+
 	@Given("^a character called (.+) exists$")
 	public void verifyExistsCharacter(String characterName) {
+		navigateToListOfCharacters();
+
 		WebElement character = CommonSteps.fetchCharacter(
 			browser, characterName);
 
