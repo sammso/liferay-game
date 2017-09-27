@@ -62,6 +62,10 @@ public class SetDefaultSiteThemePortalInstanceLifecycleListener
 			defaultLayout.getGroupId(), defaultLayout.getPrivateLayout(),
 			defaultLayout.getLayoutId(), _THEME_ID, "01", null);
 
+		/*
+
+		// Login Page
+		
 		Layout loginLayout = _layoutLocalService.fetchLayoutByFriendlyURL(
 			defaultGroup.getGroupId(), false, "/login");
 
@@ -73,7 +77,7 @@ public class SetDefaultSiteThemePortalInstanceLifecycleListener
 			defaultGroup.getPublicLayoutSet(), "login", "/login", "1_column");
 
 		DefaultLayoutPrototypesUtil.addPortletId(
-			loginLayout, LoginPortletKeys.LOGIN, "column-1");
+			loginLayout, LoginPortletKeys.LOGIN, "column-1");*/
 	}
 
 	@Reference(unbind = "-")
