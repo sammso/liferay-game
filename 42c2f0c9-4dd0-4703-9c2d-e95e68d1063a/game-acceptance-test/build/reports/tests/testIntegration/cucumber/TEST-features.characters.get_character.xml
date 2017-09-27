@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="1" name="Getting Characters" skipped="0" tests="2" time="9.673577">
+<testcase classname="features.characters.get_character" name="Getting a Character" time="3.729064">
+<failure message="com.intuit.karate.exception.KarateException: feature call failed: ../helper/setup.feature, caller: get_character.feature, arg: null&#10;&#9;at com.intuit.karate.Script.evalFeatureCall(Script.java:1473)&#10;&#9;at com.intuit.karate.Script.call(Script.java:1402)&#10;&#9;at com.intuit.karate.Script.callWithCache(Script.java:203)&#10;&#9;at com.intuit.karate.Script.eval(Script.java:239)&#10;&#9;at com.intuit.karate.Script.eval(Script.java:191)&#10;&#9;at com.intuit.karate.Script.assign(Script.java:652)&#10;&#9;at com.intuit.karate.Script.assign(Script.java:587)&#10;&#9;at com.intuit.karate.StepDefs.def(StepDefs.java:265)&#10;&#9;at ✽.* def setupReponse = callonce read('../helper/setup.feature')(features/characters/get_character.feature:8)&#10;Caused by: com.intuit.karate.exception.KarateException: failed: get_character.feature, env: null, dir: /home/travis/build/liferay-labs/liferay-game/game-acceptance-test/test-classes/integration/features/characters&#10;&#9;at com.intuit.karate.cucumber.CucumberUtils.call(CucumberUtils.java:98)&#10;&#9;at com.intuit.karate.cucumber.CucumberUtils.call(CucumberUtils.java:88)&#10;&#9;at com.intuit.karate.Script.evalFeatureCall(Script.java:1482)&#10;&#9;at com.intuit.karate.Script.evalFeatureCall(Script.java:1469)&#10;&#9;at com.intuit.karate.Script.call(Script.java:1402)&#10;&#9;at com.intuit.karate.Script.callWithCache(Script.java:203)&#10;&#9;at com.intuit.karate.Script.eval(Script.java:239)&#10;&#9;at com.intuit.karate.Script.eval(Script.java:191)&#10;&#9;at com.intuit.karate.Script.assign(Script.java:652)&#10;&#9;at com.intuit.karate.Script.assign(Script.java:587)&#10;&#9;at com.intuit.karate.StepDefs.def(StepDefs.java:265)&#10;&#9;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#10;&#9;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#10;&#9;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#10;&#9;at java.lang.reflect.Method.invoke(Method.java:498)&#10;&#9;at cucumber.runtime.Utils$1.call(Utils.java:40)&#10;&#9;at cucumber.runtime.Timeout.timeout(Timeout.java:16)&#10;&#9;at cucumber.runtime.Utils.invoke(Utils.java:34)&#10;&#9;at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)&#10;&#9;at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)&#10;&#9;at com.intuit.karate.cucumber.CucumberUtils.runStep(CucumberUtils.java:135)&#10;&#9;at com.intuit.karate.cucumber.KarateRuntime.runStep(KarateRuntime.java:76)&#10;&#9;at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)&#10;&#9;at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)&#10;&#9;at cucumber.runtime.model.CucumberScenario.runBackground(CucumberScenario.java:59)&#10;&#9;at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:42)&#10;&#9;at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)&#10;&#9;at com.intuit.karate.cucumber.CucumberRunner.run(CucumberRunner.java:147)&#10;&#9;at com.intuit.karate.cucumber.CucumberRunner.lambda$parallel$0(CucumberRunner.java:203)&#10;&#9;at java.util.concurrent.FutureTask.run(FutureTask.java:266)&#10;&#9;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)&#10;&#9;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)&#10;&#9;at java.lang.Thread.run(Thread.java:748)&#10;Caused by: com.intuit.karate.exception.KarateException: status code was: 403, expected: 200, response time: 1600, url: http://localhost:8080/api/jsonws/company/get-company-by-virtual-host?virtualHost=localhost, response: {&quot;exception&quot;:&quot;Access denied to com.liferay.portal.kernel.service.CompanyService#getCompanyByVirtualHost&quot;,&quot;throwable&quot;:&quot;java.lang.SecurityException: Access denied to com.liferay.portal.kernel.service.CompanyService#getCompanyByVirtualHost&quot;,&quot;error&quot;:{&quot;message&quot;:&quot;Access denied to com.liferay.portal.kernel.service.CompanyService#getCompanyByVirtualHost&quot;,&quot;type&quot;:&quot;java.lang.SecurityException&quot;}}&#10;&#9;at com.intuit.karate.StepDefs.status(StepDefs.java:459)&#10;&#9;at ✽.Then status 200(../helper/setup.feature:19)&#10;"><![CDATA[* def characterName = 'Robb Stark'..........................................passed
+* def characterUrl = 'https://en.wikipedia.org/wiki/File:Robb_Stark-Richard_Madden.jpg'.passed
+* call ../helper/setup.feature..............................................passed
+* def screenName = 'test'...................................................passed
+* def user = screenName + '@liferay.com'....................................passed
+* def pwd = 'test'..........................................................passed
+* def groupKey = 'Guest'....................................................passed
+* def creds = { username: '#(user)', password: '#(pwd)' }...................passed
+* def authHeaderValue = call read('../../plugins/basic-auth.js') creds......passed
+Given url companyURL........................................................passed
+And path 'get-company-by-virtual-host'......................................passed
+And header Authorization = authHeaderValue..................................passed
+And param virtualHost = 'localhost'.........................................passed
+When method get.............................................................passed
+Then status 200.............................................................failed
+* def setupReponse = callonce read('../helper/setup.feature')...............failed
+* def authHeaderValue = setupReponse.authHeaderValue........................skipped
+* def companyId = setupReponse.companyId....................................skipped
+* def groupId = setupReponse.groupId........................................skipped
+* def userId = setupReponse.userId..........................................skipped
+Given url characterURL......................................................skipped
+And path 'add-character'....................................................skipped
+And header Authorization = authHeaderValue..................................skipped
+And param userId = userId...................................................skipped
+And param groupId = groupId.................................................skipped
+And param name = characterName..............................................skipped
+And param url = characterUrl................................................skipped
+When method get.............................................................skipped
+Then status 200.............................................................skipped
+* def characterId = response.characterId....................................skipped
+Given url characterURL......................................................skipped
+And path 'get-character'....................................................skipped
+And header Authorization = authHeaderValue..................................skipped
+And param characterId = characterId.........................................skipped
+When method get.............................................................skipped
+Then status 200.............................................................skipped
+And match response contains.................................................skipped
+Given url characterURL......................................................skipped
+And path 'delete-character'.................................................skipped
+And header Authorization = authHeaderValue..................................skipped
+And param characterId = characterId.........................................skipped
+When method get.............................................................skipped
+Then status 200.............................................................skipped
+
+StackTrace:
+com.intuit.karate.exception.KarateException: feature call failed: ../helper/setup.feature, caller: get_character.feature, arg: null
+	at com.intuit.karate.Script.evalFeatureCall(Script.java:1473)
+	at com.intuit.karate.Script.call(Script.java:1402)
+	at com.intuit.karate.Script.callWithCache(Script.java:203)
+	at com.intuit.karate.Script.eval(Script.java:239)
+	at com.intuit.karate.Script.eval(Script.java:191)
+	at com.intuit.karate.Script.assign(Script.java:652)
+	at com.intuit.karate.Script.assign(Script.java:587)
+	at com.intuit.karate.StepDefs.def(StepDefs.java:265)
+	at ✽.* def setupReponse = callonce read('../helper/setup.feature')(features/characters/get_character.feature:8)
+Caused by: com.intuit.karate.exception.KarateException: failed: get_character.feature, env: null, dir: /home/travis/build/liferay-labs/liferay-game/game-acceptance-test/test-classes/integration/features/characters
+	at com.intuit.karate.cucumber.CucumberUtils.call(CucumberUtils.java:98)
+	at com.intuit.karate.cucumber.CucumberUtils.call(CucumberUtils.java:88)
+	at com.intuit.karate.Script.evalFeatureCall(Script.java:1482)
+	at com.intuit.karate.Script.evalFeatureCall(Script.java:1469)
+	at com.intuit.karate.Script.call(Script.java:1402)
+	at com.intuit.karate.Script.callWithCache(Script.java:203)
+	at com.intuit.karate.Script.eval(Script.java:239)
+	at com.intuit.karate.Script.eval(Script.java:191)
+	at com.intuit.karate.Script.assign(Script.java:652)
+	at com.intuit.karate.Script.assign(Script.java:587)
+	at com.intuit.karate.StepDefs.def(StepDefs.java:265)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at com.intuit.karate.cucumber.CucumberUtils.runStep(CucumberUtils.java:135)
+	at com.intuit.karate.cucumber.KarateRuntime.runStep(KarateRuntime.java:76)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.runBackground(CucumberScenario.java:59)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:42)
+	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
+	at com.intuit.karate.cucumber.CucumberRunner.run(CucumberRunner.java:147)
+	at com.intuit.karate.cucumber.CucumberRunner.lambda$parallel$0(CucumberRunner.java:203)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.intuit.karate.exception.KarateException: status code was: 403, expected: 200, response time: 1600, url: http://localhost:8080/api/jsonws/company/get-company-by-virtual-host?virtualHost=localhost, response: {"exception":"Access denied to com.liferay.portal.kernel.service.CompanyService#getCompanyByVirtualHost","throwable":"java.lang.SecurityException: Access denied to com.liferay.portal.kernel.service.CompanyService#getCompanyByVirtualHost","error":{"message":"Access denied to com.liferay.portal.kernel.service.CompanyService#getCompanyByVirtualHost","type":"java.lang.SecurityException"}}
+	at com.intuit.karate.StepDefs.status(StepDefs.java:459)
+	at ✽.Then status 200(../helper/setup.feature:19)
+]]></failure>
+</testcase>
+<testcase classname="features.characters.get_character" name="Get all Characters in a group" time="5.944513">
+<system-out><![CDATA[* def characterName = 'Robb Stark'..........................................passed
+* def characterUrl = 'https://en.wikipedia.org/wiki/File:Robb_Stark-Richard_Madden.jpg'.passed
+* call ../helper/setup.feature..............................................passed
+* def screenName = 'test'...................................................passed
+* def user = screenName + '@liferay.com'....................................passed
+* def pwd = 'test'..........................................................passed
+* def groupKey = 'Guest'....................................................passed
+* def creds = { username: '#(user)', password: '#(pwd)' }...................passed
+* def authHeaderValue = call read('../../plugins/basic-auth.js') creds......passed
+Given url companyURL........................................................passed
+And path 'get-company-by-virtual-host'......................................passed
+And header Authorization = authHeaderValue..................................passed
+And param virtualHost = 'localhost'.........................................passed
+When method get.............................................................passed
+Then status 200.............................................................passed
+* def companyId = response.companyId........................................passed
+* def screenName = 'test'...................................................passed
+* def user = screenName + '@liferay.com'....................................passed
+* def pwd = 'test'..........................................................passed
+* def groupKey = 'Guest'....................................................passed
+* def creds = { username: '#(user)', password: '#(pwd)' }...................passed
+* def authHeaderValue = call read('../../plugins/basic-auth.js') creds......passed
+Given url groupURL..........................................................passed
+And path 'get-group'........................................................passed
+And header Authorization = authHeaderValue..................................passed
+And param companyId = companyId.............................................passed
+And param groupKey = groupKey...............................................passed
+When method get.............................................................passed
+Then status 200.............................................................passed
+* def groupId = response.groupId............................................passed
+* def screenName = 'test'...................................................passed
+* def user = screenName + '@liferay.com'....................................passed
+* def pwd = 'test'..........................................................passed
+* def groupKey = 'Guest'....................................................passed
+* def creds = { username: '#(user)', password: '#(pwd)' }...................passed
+* def authHeaderValue = call read('../../plugins/basic-auth.js') creds......passed
+Given url userURL...........................................................passed
+And path 'get-user-by-screen-name'..........................................passed
+And header Authorization = authHeaderValue..................................passed
+And param companyId = companyId.............................................passed
+And param screenName = screenName...........................................passed
+When method get.............................................................passed
+Then status 200.............................................................passed
+* def userId = response.userId..............................................passed
+* def screenName = 'test'...................................................passed
+* def user = screenName + '@liferay.com'....................................passed
+* def pwd = 'test'..........................................................passed
+* def groupKey = 'Guest'....................................................passed
+* def creds = { username: '#(user)', password: '#(pwd)' }...................passed
+* def authHeaderValue = call read('../../plugins/basic-auth.js') creds......passed
+* def authHeaderValue = callonce read('../../plugins/basic-auth.js') creds..passed
+* def setupReponse = callonce read('../helper/setup.feature')...............passed
+* def authHeaderValue = setupReponse.authHeaderValue........................passed
+* def companyId = setupReponse.companyId....................................passed
+* def groupId = setupReponse.groupId........................................passed
+* def userId = setupReponse.userId..........................................passed
+Given url characterURL......................................................passed
+And path 'add-character'....................................................passed
+And header Authorization = authHeaderValue..................................passed
+And param userId = userId...................................................passed
+And param groupId = groupId.................................................passed
+And param name = characterName..............................................passed
+And param url = characterUrl................................................passed
+When method get.............................................................passed
+Then status 200.............................................................passed
+* def characterId = response.characterId....................................passed
+Given url characterURL......................................................passed
+And path 'get-characters'...................................................passed
+And header Authorization = authHeaderValue..................................passed
+And param groupId = groupId.................................................passed
+And param start = 0.........................................................passed
+And param end = 2...........................................................passed
+When method get.............................................................passed
+Then status 200.............................................................passed
+And match response == '#[_ > 0]'............................................passed
+Given url characterURL......................................................passed
+And path 'delete-character'.................................................passed
+And header Authorization = authHeaderValue..................................passed
+And param characterId = characterId.........................................passed
+When method get.............................................................passed
+Then status 200.............................................................passed
+]]></system-out>
+</testcase>
+</testsuite>
