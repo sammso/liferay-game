@@ -15,6 +15,7 @@
 package com.liferay.game.service.impl;
 
 import com.liferay.game.model.Character;
+import com.liferay.game.model.CharacterStatus;
 import com.liferay.game.service.base.CharacterLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
@@ -61,6 +62,7 @@ public class CharacterLocalServiceImpl extends CharacterLocalServiceBaseImpl {
 		character.setModifiedDate(now);
 		character.setName(name);
 		character.setUrl(url);
+		character.setStatus(CharacterStatus.ALIVE.toString());
 
 		characterPersistence.update(character);
 
@@ -99,6 +101,30 @@ public class CharacterLocalServiceImpl extends CharacterLocalServiceBaseImpl {
 	@Override
 	public int getCharactersCount(long groupId) {
 		return characterPersistence.countByGroupId(groupId);
+	}
+
+	@Override
+	public Character killCharacter(long characterId) throws PortalException {
+		Character character = characterPersistence.findByPrimaryKey(
+			characterId);
+
+		character.setStatus(CharacterStatus.DEAD.toString());
+
+		characterPersistence.update(character);
+
+		return character;
+	}
+
+	@Override
+	public Character reviveCharacter(long characterId) throws PortalException {
+		Character character = characterPersistence.findByPrimaryKey(
+			characterId);
+
+		character.setStatus(CharacterStatus.ALIVE.toString());
+
+		characterPersistence.update(character);
+
+		return character;
 	}
 
 	@Override

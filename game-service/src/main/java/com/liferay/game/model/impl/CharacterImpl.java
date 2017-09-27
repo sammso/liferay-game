@@ -16,6 +16,8 @@ package com.liferay.game.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.game.model.CharacterStatus;
+
 /**
  * The extended model implementation for the Character service. Represents a row in the &quot;Game_Character&quot; database table, with each column mapped to a property of this class.
  *

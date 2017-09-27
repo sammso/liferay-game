@@ -17,6 +17,8 @@ package com.liferay.game.web.internal.portlet.action;
 import com.liferay.game.exception.NoSuchCharacterException;
 import com.liferay.game.service.CharacterLocalService;
 import com.liferay.game.web.internal.constant.GamePortletKeys;
+import com.liferay.game.web.internal.constant.GameWebKeys;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -48,22 +50,37 @@ import org.osgi.service.component.annotations.Reference;
 public class EditCharacterMVCActionCommand extends BaseMVCActionCommand {
 
 	protected void deleteCharacters(ActionRequest actionRequest)
-		throws Exception {
+		throws PortalException {
 
-		long[] deleteCharacterIds = null;
+		for (long characterId : getCharacterIds(actionRequest)) {
+			_characterLocalService.deleteCharacter(characterId);
+		}
+	}
+
+	protected long[] getCharacterIds(ActionRequest actionRequest) {
+		long[] characterIds = null;
 
 		long characterId = ParamUtil.getLong(actionRequest, "characterId");
 
 		if (characterId > 0) {
-			deleteCharacterIds = new long[] {characterId};
+			return new long[] {characterId};
 		}
-		else {
-			deleteCharacterIds = ParamUtil.getLongValues(
-				actionRequest, "rowIds");
-		}
+		return ParamUtil.getLongValues(actionRequest, "rowIds");
+	}
 
-		for (long deleteCharacterId : deleteCharacterIds) {
-			_characterLocalService.deleteCharacter(deleteCharacterId);
+	protected void killCharacters(ActionRequest actionRequest)
+		throws PortalException {
+
+		for (long characterId : getCharacterIds(actionRequest)) {
+			_characterLocalService.killCharacter(characterId);
+		}
+	}
+
+	protected void reviveCharacters(ActionRequest actionRequest)
+		throws PortalException {
+
+		for (long characterId : getCharacterIds(actionRequest)) {
+			_characterLocalService.reviveCharacter(characterId);
 		}
 	}
 
@@ -80,6 +97,12 @@ public class EditCharacterMVCActionCommand extends BaseMVCActionCommand {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteCharacters(actionRequest);
+			}
+			else if (cmd.equals(GameWebKeys.KILL_CHARACTER)) {
+				killCharacters(actionRequest);
+			}
+			else if (cmd.equals(GameWebKeys.REVIVE_CHARACTER)) {
+				reviveCharacters(actionRequest);
 			}
 		}
 		catch (Exception e) {

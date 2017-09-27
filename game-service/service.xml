@@ -25,6 +25,7 @@
 
 		<column name="name" type="String" />
 		<column name="url" type="String" />
+		<column name="status" type="String" />
 
 		<!-- Order -->
 

@@ -2401,6 +2401,7 @@ public class CharacterPersistenceImpl extends BasePersistenceImpl<Character>
 		characterImpl.setModifiedDate(character.getModifiedDate());
 		characterImpl.setName(character.getName());
 		characterImpl.setUrl(character.getUrl());
+		characterImpl.setStatus(character.getStatus());
 
 		return characterImpl;
 	}

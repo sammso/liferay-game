@@ -286,6 +286,11 @@ public interface CharacterLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	public Character killCharacter(long characterId) throws PortalException;
+
+	public Character reviveCharacter(long characterId)
+		throws PortalException;
+
 	/**
 	* Updates the character in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

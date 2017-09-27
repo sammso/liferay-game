@@ -8,5 +8,6 @@ create table Game_Character (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
-	url VARCHAR(75) null
+	url VARCHAR(75) null,
+	status VARCHAR(75) null
 );
