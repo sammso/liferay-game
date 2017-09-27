@@ -60,8 +60,9 @@ configure(subprojects.findAll {!it.childProjects && !it.name.contains('theme')})
 	testIntegration {
 		ignoreFailures = false
 
-		systemProperty "test.url",  System.getenv().get("TEST_URL")?: "http://localhost:8080"
+		systemProperty "test.url", getTestUrl()
 
+		environment "TEST_URL", getTestUrl()
 	}
 }
 
@@ -169,4 +170,8 @@ def getImageNameWithUser() {
 
 def getImageNameWithUserAndVersion() {
 	return getImageNameWithUser() + ":" + getImageVersion()
+}
+
+def getTestUrl() {
+	return System.getenv().get("TEST_URL")?: "http://localhost:8080"
 }
