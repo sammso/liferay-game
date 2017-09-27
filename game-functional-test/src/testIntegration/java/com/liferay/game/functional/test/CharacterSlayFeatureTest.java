@@ -33,7 +33,6 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -62,16 +61,8 @@ public class CharacterSlayFeatureTest {
 		FunctionalTestUtil.createReport();
 	}
 
-	@AfterClass
-	public static void tearDownClass() {
-	}
-
 	@Then("^I can't slay (.+)$")
 	public void cantSlayCharacter(String characterName) {
-	}
-
-	protected void navigateToListOfCharacters() {
-		browser.get(_url.toExternalForm());
 	}
 
 	@Given("^I slay (.+)$")
@@ -93,17 +84,8 @@ public class CharacterSlayFeatureTest {
 
 			Assert.fail("I shouldn't be able to slay this character.");
 		}
-		catch(ElementNotVisibleException e) {
+		catch (ElementNotVisibleException enve) {
 		}
-	}
-
-	@Then("^(.+) is dead$")
-	public void verifyDeadCharacter(String characterName) {
-		WebElement character = CommonSteps.getCharacterCard(
-			browser, characterName);
-
-		character.findElement(
-			By.xpath("//*[contains(@class,'sticker')][contains(.,'DEAD')]"));
 	}
 
 	@And("^(.+) is alive")
@@ -117,18 +99,24 @@ public class CharacterSlayFeatureTest {
 			browser, By.xpath(cardLocator + stickerLocator));
 	}
 
+	@Then("^(.+) is dead$")
+	public void verifyDeadCharacter(String characterName) {
+		WebElement character = CommonSteps.getCharacterCard(
+			browser, characterName);
+
+		character.findElement(
+			By.xpath("//*[contains(@class,'sticker')][contains(.,'DEAD')]"));
+	}
+
 	@Given("^a character called (.+) exists$")
 	public void verifyExistsCharacter(String characterName) {
 		navigateToListOfCharacters();
 
-		WebElement character = CommonSteps.fetchCharacter(
-			browser, characterName);
+		CommonSteps.addCharacterIfItDoesNotExist(browser, characterName);
+	}
 
-		if (character != null) {
-			return;
-		}
-
-		CommonSteps.addCharacter(browser, characterName);
+	protected void navigateToListOfCharacters() {
+		browser.get(_url.toExternalForm());
 	}
 
 	@ArquillianResource

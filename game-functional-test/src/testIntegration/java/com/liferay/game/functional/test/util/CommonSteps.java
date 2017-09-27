@@ -36,7 +36,7 @@ public class CommonSteps {
 		FunctionalTestLocatorsHelper.clickElement(
 			browser, By.xpath("//a[@data-original-title='Add new Character']"));
 
-		CommonSteps.introduceValueInInput(
+		introduceValueInInput(
 			browser, "_com_liferay_game_web_portlet_GamePortlet_name",
 			characterName);
 
@@ -46,7 +46,7 @@ public class CommonSteps {
 
 		String imageURL = "/o/game-web/images/got/" + imageName + ".png";
 
-		CommonSteps.introduceValueInInput(
+		introduceValueInInput(
 			browser, "_com_liferay_game_web_portlet_GamePortlet_url", imageURL);
 
 		FunctionalTestLocatorsHelper.clickElement(
@@ -56,6 +56,16 @@ public class CommonSteps {
 			browser,
 			By.xpath(
 				"//*[contains(., 'Your request completed successfully.')]"));
+	}
+
+	public static void addCharacterIfItDoesNotExist(
+		WebDriver browser, String characterName) {
+
+		WebElement character = fetchCharacter(browser, characterName);
+
+		if (character == null) {
+			addCharacter(browser, characterName);
+		}
 	}
 
 	public static void deleteCharacter(
@@ -147,21 +157,12 @@ public class CommonSteps {
 
 		String menuId = actionsLink.getAttribute("id");
 
-		System.out.println("menuId: " + menuId);
-
 		WebElement actionsMenu =
 			FunctionalTestLocatorsHelper.getClickableElement(
-				browser, By.xpath("//*[@aria-labelledby='" + menuId +"']"));
-
-		System.out.println("actionsMenu: " + "//*[@aria-labelledby='" + menuId +"']");
-
+				browser, By.xpath("//*[@aria-labelledby='" + menuId + "']"));
 
 		WebElement actionLink = actionsMenu.findElement(
 			By.xpath("//a[contains(.,'" + action + "')]"));
-
-		System.out.println("actionsLink: " + "//a[contains(.,'" + action + "')]");
-
-
 
 		actionLink.click();
 	}
