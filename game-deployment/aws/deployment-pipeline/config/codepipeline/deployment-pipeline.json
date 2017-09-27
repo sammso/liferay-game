@@ -158,6 +158,77 @@
             "runOrder": 1
           }
         ]
+      },
+      {
+        "name": "manual-approval",
+        "actions": [
+          {
+            "inputArtifacts": [],
+            "name": "manual-approval",
+            "actionTypeId": {
+              "category": "Approval",
+              "owner": "AWS",
+              "version": "1",
+              "provider": "Manual"
+            },
+            "outputArtifacts": [],
+            "configuration": {},
+            "runOrder": 1
+          }
+        ]
+      },
+      {
+        "name": "deploy-to-prod",
+        "actions": [
+          {
+            "inputArtifacts": [
+              {
+                "name": "deployment-source-output"
+              }
+            ],
+            "name": "deploy-to-prod",
+            "actionTypeId": {
+              "category": "Deploy",
+              "owner": "AWS",
+              "version": "1",
+              "provider": "ElasticBeanstalk"
+            },
+            "outputArtifacts": [],
+            "configuration": {
+              "ApplicationName": "APPLICATION_NAME",
+              "EnvironmentName": "APPLICATION_NAME-prod"
+            },
+            "runOrder": 1
+          }
+        ]
+      },
+      {
+        "name": "test-prod",
+        "actions": [
+          {
+            "inputArtifacts": [
+              {
+                "name": "test-source-output"
+              }
+            ],
+            "name": "test-prod",
+            "actionTypeId": {
+              "category": "Test",
+              "owner": "AWS",
+              "version": "1",
+              "provider": "CodeBuild"
+            },
+            "outputArtifacts": [
+              {
+                "name": "test-prod-output"
+              }
+            ],
+            "configuration": {
+              "ProjectName": "APPLICATION_NAME-test-prod"
+            },
+            "runOrder": 1
+          }
+        ]
       }
     ],
     "artifactStore": {
