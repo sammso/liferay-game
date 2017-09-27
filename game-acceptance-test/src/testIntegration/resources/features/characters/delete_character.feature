@@ -46,39 +46,3 @@ Feature: Deleting Characters
 		When method get
 		Then status 500
 		And match response.exception == 'No Character exists with the primary key ' + characterId
-
-
-	Scenario: Deleting all Characters in a group
-
-	 # Setup
-
-		Given url characterURL
-		And path 'add-character'
-		And header Authorization = authHeaderValue
-		And param userId = userId
-		And param groupId = groupId
-		And param name = characterName
-		And param url = characterUrl
-		When method get
-		Then status 200
-
-		* def characterId = response.characterId
-
-	 # Delete characters
-
-		Given url characterURL
-		And path 'delete-characters'
-		And header Authorization = authHeaderValue
-		And param groupId = groupId
-		When method get
-		Then status 200
-
-	 # Verify
-
-		Given url characterURL
-		And path 'get-character'
-		And header Authorization = authHeaderValue
-		And param characterId = characterId
-		When method get
-		Then status 500
-		And match response.exception == 'No Character exists with the primary key ' + characterId
