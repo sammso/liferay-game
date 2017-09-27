@@ -51,39 +51,22 @@ public class SetDefaultSiteThemePortalInstanceLifecycleListener
 			company.getCompanyId(),
 			PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
-		Layout defaultLayout = _layoutLocalService.fetchLayout(
-			defaultGroup.getDefaultPublicPlid());
+		Layout homeLayout = _layoutLocalService.fetchLayoutByFriendlyURL(
+			defaultGroup.getGroupId(), false, "/home");
 
-		if (defaultLayout != null) {
-			_layoutLocalService.deleteLayout(defaultLayout);
+		if (homeLayout != null) {
+			_layoutLocalService.deleteLayout(homeLayout);
 		}
-		
-		defaultLayout = DefaultLayoutPrototypesUtil.addLayout(
-			defaultGroup.getPublicLayoutSet(), "home", "/home", "1_column");
+
+		homeLayout = DefaultLayoutPrototypesUtil.addLayout(
+			defaultGroup.getPublicLayoutSet(), "home", "/game", "1_column");
 
 		DefaultLayoutPrototypesUtil.addPortletId(
-			defaultLayout, GamePortletKeys.GAME, "column-1");
+			homeLayout, GamePortletKeys.GAME, "column-1");
 
 		_layoutLocalService.updateLookAndFeel(
-			defaultLayout.getGroupId(), defaultLayout.getPrivateLayout(),
-			defaultLayout.getLayoutId(), _THEME_ID, "01", null);
-
-		/*
-
-		// Login Page
-		
-		Layout loginLayout = _layoutLocalService.fetchLayoutByFriendlyURL(
-			defaultGroup.getGroupId(), false, "/login");
-
-		if (loginLayout != null) {
-			return;
-		}
-
-		loginLayout = DefaultLayoutPrototypesUtil.addLayout(
-			defaultGroup.getPublicLayoutSet(), "login", "/login", "1_column");
-
-		DefaultLayoutPrototypesUtil.addPortletId(
-			loginLayout, LoginPortletKeys.LOGIN, "column-1");*/
+			homeLayout.getGroupId(), homeLayout.getPrivateLayout(),
+			homeLayout.getLayoutId(), _THEME_ID, "01", null);
 	}
 
 	@Reference(unbind = "-")
