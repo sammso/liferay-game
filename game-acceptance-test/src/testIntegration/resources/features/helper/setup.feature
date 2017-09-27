@@ -5,6 +5,7 @@ Feature: Setup greature: Get userId, groupId and companyId and authenticate
 		* def screenName = 'test'
 		* def user = screenName + '@liferay.com'
 		* def pwd = 'test'
+		* def groupKey = 'Guest'
 		* def creds = { username: '#(user)', password: '#(pwd)' }
 		* def authHeaderValue = call read('../../plugins/basic-auth.js') creds
 
@@ -22,15 +23,14 @@ Feature: Setup greature: Get userId, groupId and companyId and authenticate
 	Scenario: Get groupId
 
 		Given url groupURL
-		And path 'get-groups'
+		And path 'get-group'
 		And header Authorization = authHeaderValue
 		And param companyId = companyId
-		And param parentGroupId = 0
-		And param site = true
+		And param groupKey = groupKey
 		When method get
 		Then status 200
 
-		* def groupId = response[0].groupId
+		* def groupId = response.groupId
 
 	Scenario: Get userId
 
