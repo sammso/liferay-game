@@ -11,9 +11,9 @@ phases:
     commands:
       - echo build phase started on `date`
       - chmod a+x $CODEBUILD_SRC_DIR/gradlew
-      - cd $CODEBUILD_SRC_DIR/game-acceptance-tests
+      - cd $CODEBUILD_SRC_DIR/game-acceptance-test
       - ../gradlew -Pdocker.apply.plugin=false testIntegration
-      - cd $CODEBUILD_SRC_DIR/game-functional-tests
+      - cd $CODEBUILD_SRC_DIR/game-functional-test
       - ../gradlew -Pdocker.apply.plugin=false testIntegration
       - cd $CODEBUILD_SRC_DIR
   post_build:
