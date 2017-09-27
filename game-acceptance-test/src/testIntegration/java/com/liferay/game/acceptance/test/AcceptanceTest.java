@@ -17,8 +17,6 @@ package com.liferay.game.acceptance.test;
 import com.intuit.karate.cucumber.CucumberRunner;
 import com.intuit.karate.cucumber.KarateReporter;
 
-import cucumber.api.CucumberOptions;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -44,7 +42,6 @@ public class AcceptanceTest {
 
 	@Test
 	public void testAllEndpoints() throws IOException {
-
 		String[] featureNames = {
 			"characters/add_character", "characters/get_character",
 			"characters/update_character", "characters/delete_character"
