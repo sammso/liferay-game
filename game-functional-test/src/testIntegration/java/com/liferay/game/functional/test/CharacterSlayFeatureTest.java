@@ -14,6 +14,7 @@
 
 package com.liferay.game.functional.test;
 
+import com.liferay.game.functional.test.util.CommonSteps;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
 
 import cucumber.api.CucumberOptions;
@@ -34,7 +35,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * @author Julio Camarero
@@ -59,10 +62,6 @@ public class CharacterSlayFeatureTest {
 	public static void tearDownClass() {
 	}
 
-	@Then("^(.+) is dead$")
-	public void cantSaveCharacter(String characterName) {
-	}
-
 	@Then("^I can't slay (.+)$")
 	public void cantSlayCharacter(String characterName) {
 	}
@@ -74,6 +73,7 @@ public class CharacterSlayFeatureTest {
 
 	@Given("^I slay (.+)$")
 	public void slayCharacter(String characterName) {
+		CommonSteps.slayCharacter(browser, characterName);
 	}
 
 	@After
@@ -85,10 +85,28 @@ public class CharacterSlayFeatureTest {
 
 	@Given("^I try to slay (.+)$")
 	public void tryToSlayCharacter(String characterName) {
+		CommonSteps.slayCharacter(browser, characterName);
+	}
+
+	@Then("^(.+) is dead$")
+	public void verifyDeadCharacter(String characterName) {
+		WebElement character = CommonSteps.getCharacterCard(
+			browser, characterName);
+
+		character.findElement(
+			By.xpath("//*[contains(@class,'sticker')][contains(.,'DEAD')]"));
 	}
 
 	@Given("^a character called (.+) exists$")
 	public void verifyExistsCharacter(String characterName) {
+		WebElement character = CommonSteps.fetchCharacter(
+			browser, characterName);
+
+		if (character != null) {
+			return;
+		}
+
+		CommonSteps.addCharacter(browser, characterName);
 	}
 
 	@ArquillianResource
