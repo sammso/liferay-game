@@ -60,9 +60,8 @@ configure(subprojects.findAll {!it.childProjects && !it.name.contains('theme')})
 	testIntegration {
 		ignoreFailures = false
 
-		systemProperty "test.url",  System.getenv().get("TEST_URL")
+		systemProperty "test.url",  System.getenv().get("TEST_URL")?: "http://localhost:8080"
 
-		environment "TEST_URL",   System.getenv().get("TEST_URL")?: "http://localhost:8080"
 	}
 }
 
