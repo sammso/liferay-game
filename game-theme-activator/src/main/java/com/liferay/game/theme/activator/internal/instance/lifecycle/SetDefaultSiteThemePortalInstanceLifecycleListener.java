@@ -14,6 +14,7 @@
 
 package com.liferay.game.theme.activator.internal.instance.lifecycle;
 
+import com.liferay.game.web.internal.constant.GamePortletKeys;
 import com.liferay.login.web.constants.LoginPortletKeys;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
@@ -53,10 +54,15 @@ public class SetDefaultSiteThemePortalInstanceLifecycleListener
 		Layout defaultLayout = _layoutLocalService.fetchLayout(
 			defaultGroup.getDefaultPublicPlid());
 
-		if (defaultLayout == null) {
-			defaultLayout = DefaultLayoutPrototypesUtil.addLayout(
-				defaultGroup.getPublicLayoutSet(), "home", "/home", "1_column");
+		if (defaultLayout != null) {
+			_layoutLocalService.deleteLayout(defaultLayout);
 		}
+		
+		defaultLayout = DefaultLayoutPrototypesUtil.addLayout(
+			defaultGroup.getPublicLayoutSet(), "home", "/home", "1_column");
+
+		DefaultLayoutPrototypesUtil.addPortletId(
+			defaultLayout, GamePortletKeys.GAME, "column-1");
 
 		_layoutLocalService.updateLookAndFeel(
 			defaultLayout.getGroupId(), defaultLayout.getPrivateLayout(),
