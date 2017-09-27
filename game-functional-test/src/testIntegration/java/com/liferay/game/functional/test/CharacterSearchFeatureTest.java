@@ -48,7 +48,6 @@ import org.openqa.selenium.WebDriver;
 	features = "features/character_search.feature",
 	plugin = {"com.cucumber.listener.ExtentCucumberFormatter"}
 )
-@Ignore
 @RunAsClient
 @RunWith(CukeSpace.class)
 public class CharacterSearchFeatureTest {
@@ -59,14 +58,6 @@ public class CharacterSearchFeatureTest {
 	@BeforeClass
 	public static void setUpClass() {
 		FunctionalTestUtil.createReport();
-	}
-
-	@AfterClass
-	public static void tearDownClass() {
-	}
-
-	@When("^I add a new character called (.+)$")
-	public void addCharacter(String characterName) {
 	}
 
 	@Then("^I see (.+) in the list of characters$")
