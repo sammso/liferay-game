@@ -2,6 +2,8 @@ phases:
   install:
     commands:
       - echo install phase started on `date`
+      - curl -O https://liferay-labs.github.io/reports-catcher/catch-reports.sh
+      - chmod +x $CODEBUILD_SRC_DIR/catch-reports.sh
   pre_build:
     commands:
       - echo pre_build phase started on `date`
@@ -13,5 +15,6 @@ phases:
   post_build:
     commands:
       - echo post_build phase started on `date`
+      - $CODEBUILD_SRC_DIR/catch-reports.sh
 
 version: 0.2
