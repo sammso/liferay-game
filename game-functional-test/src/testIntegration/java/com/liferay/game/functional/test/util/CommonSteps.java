@@ -17,108 +17,96 @@ package com.liferay.game.functional.test.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.net.URL;
-
 import org.junit.Assert;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 /**
  * @author Julio Camarero
  */
 public class CommonSteps {
 
-	public static void cantClickInButton(
-		WebDriver browser, String buttonText, String elementType) {
-
-		WebElement button = getButton(browser, buttonText, elementType);
-
-		Assert.assertFalse(button.isEnabled());
-	}
-
-	public static void clickInBackLink(WebDriver browser) {
+	public static void addCharacter(WebDriver browser, String characterName) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Trying to click on  back link");
+			_log.debug("Adding Character  " + characterName);
 		}
 
-		WebElement backLink = FunctionalTestLocatorsHelper.getClickableElement(
-			browser, By.xpath("//a[@title='Back']"));
+		FunctionalTestLocatorsHelper.clickElement(
+			browser, By.xpath("//a[@data-original-title='Add new Character']"));
 
-		backLink.click();
+		CommonSteps.introduceValueInInput(
+			browser, "_com_liferay_game_web_portlet_GamePortlet_name",
+			characterName);
+
+		String imageName = characterName.replaceAll("\\s", "");
+
+		imageName = imageName.toLowerCase();
+
+		String imageURL = "/o/game-web/images/got/" + imageName + ".png";
+
+		CommonSteps.introduceValueInInput(
+			browser, "_com_liferay_game_web_portlet_GamePortlet_url", imageURL);
+
+		FunctionalTestLocatorsHelper.clickElement(
+			browser, By.xpath("//button[@type='submit']"));
+
+		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+			browser,
+			By.xpath(
+				"//*[contains(., 'Your request completed successfully.')]"));
 	}
 
-	public static void clickInButton(
-		WebDriver browser, String buttonText, String elementType) {
+	public static void deleteCharacter(
+		WebDriver browser, String characterName) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Trying to click on  " + elementType + " " + buttonText);
+			_log.debug("Deleting Character  " + characterName);
 		}
 
-		WebElement button = getButton(browser, buttonText, elementType);
+		clickOnCharacterAction(browser, characterName, "Delete");
 
-		button.click();
+		browser.switchTo().alert().accept();
+
+		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+			browser,
+			By.xpath(
+				"//*[contains(., 'Your request completed successfully.')]"));
 	}
 
-	public static void deleteTouchpoint(
-		WebDriver browser, URL appUrl, String name) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Deleting touchpoint  " + name);
-		}
-
-		//navigateToPage(browser, appUrl, "touchpoints/list");
-
-		WebElement row = FunctionalTestLocatorsHelper.getElement(
-			browser, By.xpath("//p[contains(.,'" + name + "')]/ancestor::li"));
-
-		Actions actions = new Actions(browser);
-
-		actions.moveToElement(row).perform();
-
-		WebElement deleteLink = row.findElement(
-			By.xpath(".//a[@title='delete']"));
-
-		JavascriptExecutor js = (JavascriptExecutor)browser;
-
-		js.executeScript("arguments[0].click();", deleteLink);
-
-		try {
-
-			// We should wait for the success message instead once the
-			// success message is available
-
-			Thread.sleep(2000);
-		}
-		catch (InterruptedException ie) {
-			ie.printStackTrace();
-		}
-	}
-
-	public static WebElement fetchTouchpoint(
-		WebDriver browser, String touchpointName) {
+	public static WebElement fetchCharacter(
+		WebDriver browser, String characterName) {
 
 		return FunctionalTestLocatorsHelper.fetchElement(
-			browser, By.xpath("//div[@class='dataset-display']"),
-			By.xpath("//a[contains(., '" + touchpointName + "')]"));
+			browser,
+			By.xpath(
+				"//*[@id=" +
+					"'_com_liferay_game_web_portlet_GamePortlet_characters']"),
+			By.xpath("//li[contains(., '" + characterName + "')]"));
 	}
 
-	public static void findTouchpointInList(
-		WebDriver browser, String touchpointName) {
-
+	public static void findCharacter(WebDriver browser, String charactrName) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Looking for touchpoint  " + touchpointName);
+			_log.debug("Looking for Character  " + charactrName);
 		}
 
-		WebElement touchpoint = fetchTouchpoint(browser, touchpointName);
+		WebElement touchpoint = fetchCharacter(browser, charactrName);
 
 		Assert.assertNotNull(
-			"Can't find touchpoint " + touchpointName +
-				" in the list of touchpoints.",
+			"Can't find character " + charactrName +
+				" in the list of characters.",
 			touchpoint);
+	}
+
+	public static WebElement getCharacterCard(
+		WebDriver browser, String characterName) {
+
+		return FunctionalTestLocatorsHelper.getElement(
+			browser,
+			By.xpath(
+				"//*[contains(@class,'card-row')][contains(.,'" +
+					characterName + "')]"));
 	}
 
 	public static void introduceValueInInput(
@@ -134,20 +122,48 @@ public class CommonSteps {
 		input.sendKeys(value);
 	}
 
-	protected static WebElement getButton(
-		WebDriver browser, String buttonText, String elementType) {
-
-		String xPath;
-
-		if (elementType.equals("link")) {
-			xPath = "//a[contains(., '" + buttonText + "')]";
-		}
-		else {
-			xPath = "//input[contains(@value, '" + buttonText + "')]";
+	public static void slayCharacter(WebDriver browser, String characterName) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Slaying Character  " + characterName);
 		}
 
-		return FunctionalTestLocatorsHelper.getElement(
-			browser, By.xpath(xPath));
+		clickOnCharacterAction(browser, characterName, "Kill");
+
+		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+			browser,
+			By.xpath(
+				"//*[contains(., 'Your request completed successfully.')]"));
+	}
+
+	protected static void clickOnCharacterAction(
+		WebDriver browser, String characterName, String action) {
+
+		WebElement card = getCharacterCard(browser, characterName);
+
+		WebElement actionsLink = card.findElement(
+			By.className("dropdown-toggle"));
+
+		actionsLink.click();
+
+		String menuId = actionsLink.getAttribute("id");
+
+		System.out.println("menuId: " + menuId);
+
+		WebElement actionsMenu =
+			FunctionalTestLocatorsHelper.getClickableElement(
+				browser, By.xpath("//*[@aria-labelledby='" + menuId +"']"));
+
+		System.out.println("actionsMenu: " + "//*[@aria-labelledby='" + menuId +"']");
+
+
+		WebElement actionLink = actionsMenu.findElement(
+			By.xpath("//a[contains(.,'" + action + "')]"));
+
+		System.out.println("actionsLink: " + "//a[contains(.,'" + action + "')]");
+
+
+
+		actionLink.click();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(CommonSteps.class);

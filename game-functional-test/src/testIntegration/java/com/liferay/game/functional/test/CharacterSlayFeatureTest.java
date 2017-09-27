@@ -14,11 +14,14 @@
 
 package com.liferay.game.functional.test;
 
+import com.liferay.game.functional.test.util.CommonSteps;
+import com.liferay.game.functional.test.util.FunctionalTestLocatorsHelper;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -31,10 +34,14 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * @author Julio Camarero
@@ -59,21 +66,17 @@ public class CharacterSlayFeatureTest {
 	public static void tearDownClass() {
 	}
 
-	@Then("^(.+) is dead$")
-	public void cantSaveCharacter(String characterName) {
-	}
-
 	@Then("^I can't slay (.+)$")
 	public void cantSlayCharacter(String characterName) {
 	}
 
-	@Given("^I am in the list of characters$")
-	public void navigateToListOfCharacters() {
+	protected void navigateToListOfCharacters() {
 		browser.get(_url.toExternalForm());
 	}
 
 	@Given("^I slay (.+)$")
 	public void slayCharacter(String characterName) {
+		CommonSteps.slayCharacter(browser, characterName);
 	}
 
 	@After
@@ -85,10 +88,47 @@ public class CharacterSlayFeatureTest {
 
 	@Given("^I try to slay (.+)$")
 	public void tryToSlayCharacter(String characterName) {
+		try {
+			CommonSteps.slayCharacter(browser, characterName);
+
+			Assert.fail("I shouldn't be able to slay this character.");
+		}
+		catch(ElementNotVisibleException e) {
+		}
+	}
+
+	@Then("^(.+) is dead$")
+	public void verifyDeadCharacter(String characterName) {
+		WebElement character = CommonSteps.getCharacterCard(
+			browser, characterName);
+
+		character.findElement(
+			By.xpath("//*[contains(@class,'sticker')][contains(.,'DEAD')]"));
+	}
+
+	@And("^(.+) is alive")
+	public void verifyAliveCharacter(String characterName) {
+		String cardLocator = "//*[contains(@class,'card-row')][contains(.,'" +
+			characterName + "')]";
+		String stickerLocator =
+			"//*[contains(@class,'sticker')][contains(.,'DEAD')]";
+
+		FunctionalTestLocatorsHelper.waitForElementNotToBeVisible(
+			browser, By.xpath(cardLocator + stickerLocator));
 	}
 
 	@Given("^a character called (.+) exists$")
 	public void verifyExistsCharacter(String characterName) {
+		navigateToListOfCharacters();
+
+		WebElement character = CommonSteps.fetchCharacter(
+			browser, characterName);
+
+		if (character != null) {
+			return;
+		}
+
+		CommonSteps.addCharacter(browser, characterName);
 	}
 
 	@ArquillianResource
