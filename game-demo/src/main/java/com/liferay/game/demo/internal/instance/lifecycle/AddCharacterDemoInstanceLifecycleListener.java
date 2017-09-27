@@ -14,6 +14,7 @@
 
 package com.liferay.game.demo.internal.instance.lifecycle;
 
+import com.liferay.game.search.CharacterIndexer;
 import com.liferay.game.service.CharacterLocalService;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
@@ -109,6 +110,9 @@ public class AddCharacterDemoInstanceLifecycleListener
 
 	@Reference
 	private CharacterLocalService _characterLocalService;
+
+	@Reference
+	private CharacterIndexer _characterIndexer;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
