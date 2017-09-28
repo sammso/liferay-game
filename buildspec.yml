@@ -1,0 +1,44 @@
+phases:
+  install:
+    commands:
+      - echo install phase started on `date`
+      - curl -O https://liferay-labs.github.io/reports-catcher/catch-reports.sh
+      - chmod +x $CODEBUILD_SRC_DIR/catch-reports.sh
+  pre_build:
+    commands:
+      - echo pre_build phase started on `date`
+  build:
+    commands:
+      - echo build phase started on `date`
+      - chmod a+x $CODEBUILD_SRC_DIR/gradlew
+      - >
+        case "$TEST_ENVIRONMENT_SUFFIX" in
+        dev)
+            echo "Executing functional tests"
+            cd $CODEBUILD_SRC_DIR/game-functional-test
+            ../gradlew -Pdocker.apply.plugin=false testIntegration
+            ;;
+        pre)
+            echo "Executing acceptance tests"
+            cd $CODEBUILD_SRC_DIR/game-acceptance-test
+            ../gradlew -Pdocker.apply.plugin=false testIntegration
+            ;;
+
+        prod)
+            echo "Executing functional tests"
+            cd $CODEBUILD_SRC_DIR/game-functional-test
+            ../gradlew -Pdocker.apply.plugin=false testIntegration
+            echo "Executing acceptance tests"
+            cd $CODEBUILD_SRC_DIR/game-acceptance-test
+            ../gradlew -Pdocker.apply.plugin=false testIntegration
+            ;;
+        *)
+            echo "Supported values for TEST_ENVIRONMENT_SUFFIX: dev,pre,prod"
+            exit 1
+        esac
+      - cd $CODEBUILD_SRC_DIR
+  post_build:
+    commands:
+      - echo post_build phase started on `date`
+
+version: 0.2
