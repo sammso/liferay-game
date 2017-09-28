@@ -4,6 +4,54 @@
 @import "partials/footer";
 @import "partials/navbar";
 
+.portlet-boundary_com_liferay_game_web_portlet_GamePortlet_ {
+	background-image: url(/o/game-theme/images/bg.jpg);
+	background-size: cover;
+	background-position: center;
+
+	.status-DEAD .aspect-ratio:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background: url(/o/game-theme/images/grave.png) center center no-repeat;
+		background-size: auto;
+		opacity: 0.8;
+
+		animation-name: bounceInUp;
+		animation-duration: 1s;
+		animation-fill-mode: both;
+	}
+
+	.navbar-default.collapse-basic-search {
+		border-radius: 20px 20px 0 0;
+	}
+
+	.management-bar-default {
+		border-radius: 0 0 20px 20px;
+	}
+
+	.card {
+		border-radius: 20px;
+		overflow: hidden !important;
+	}
+
+	.taglib-vertical-card-footer {
+		min-height: 30px;
+		text-align: center;
+	}
+}
+
+#footer-recursive {
+	margin: 0;
+}
+
+@keyframes bounceInUp{
+	0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(0,3000px,0)}60%{opacity:1;transform:translate3d(0,-20px,0)}75%{transform:translate3d(0,10px,0)}90%{transform:translate3d(0,-5px,0)}to{transform:translateZ(0)}
+}
+
 #column-1 {
 	padding-left: 0;
 	padding-right: 0;
@@ -49,7 +97,6 @@
     -moz-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
     -o-filter: grayscale(100%); /* Not yet supported in Gecko, Opera or IE */
-    filter: url(resources.svg#desaturate); /* Gecko */
     filter: gray; /* IE */
     -webkit-filter: grayscale(1); /* Old WebKit */
 }
