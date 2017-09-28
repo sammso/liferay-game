@@ -44,7 +44,7 @@ long characterId = BeanParamUtil.getLong(character, request, "characterId");
 		<aui:fieldset>
 			<aui:input name="name" />
 
-			<aui:input name="url" />
+			<aui:input label="image-url" name="url" />
 		</aui:fieldset>
 	</aui:fieldset-group>
 

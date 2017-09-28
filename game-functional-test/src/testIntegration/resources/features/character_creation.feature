@@ -13,4 +13,5 @@ Feature: Creation of Characters
 
         Given I am in the list of characters
         When I add a new character without a name
+        #Then a girl has no name
         Then I can't save the character
