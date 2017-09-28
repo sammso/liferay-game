@@ -109,10 +109,10 @@ public class AddCharacterDemoInstanceLifecycleListener
 	}
 
 	@Reference
-	private CharacterLocalService _characterLocalService;
+	private CharacterIndexer _characterIndexer;
 
 	@Reference
-	private CharacterIndexer _characterIndexer;
+	private CharacterLocalService _characterLocalService;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
