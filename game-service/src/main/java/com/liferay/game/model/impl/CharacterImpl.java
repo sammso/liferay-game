@@ -15,6 +15,7 @@
 package com.liferay.game.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The extended model implementation for the Character service. Represents a row in the &quot;Game_Character&quot; database table, with each column mapped to a property of this class.
@@ -36,4 +37,13 @@ public class CharacterImpl extends CharacterBaseImpl {
 	public CharacterImpl() {
 	}
 
+	public String getUrl() {
+		String url = super.getUrl();
+
+		if (Validator.isNull(url)) {
+			url = "/o/game-web/images/got/throne2.png";
+		}
+
+		return url;
+	}
 }
