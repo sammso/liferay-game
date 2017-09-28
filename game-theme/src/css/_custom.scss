@@ -1,0 +1,265 @@
+@import "portlet_decorator";
+
+@import "partials/buttons";
+@import "partials/footer";
+@import "partials/navbar";
+
+.portlet-boundary_com_liferay_game_web_portlet_GamePortlet_ {
+	background-image: url(/o/game-theme/images/bg.jpg);
+	background-size: cover;
+	background-position: center;
+
+	.status-DEAD .aspect-ratio:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background: url(/o/game-theme/images/grave.png) center center no-repeat;
+		background-size: auto;
+		opacity: 0.8;
+
+		animation-name: bounceInUp;
+		animation-duration: 1s;
+		animation-fill-mode: both;
+	}
+
+	.navbar-default.collapse-basic-search {
+		border-radius: 20px 20px 0 0;
+	}
+
+	.management-bar-default {
+		border-radius: 0 0 20px 20px;
+	}
+
+	.card {
+		border-radius: 20px;
+		overflow: hidden !important;
+	}
+
+	.taglib-vertical-card-footer {
+		min-height: 30px;
+		text-align: center;
+	}
+}
+
+#footer-recursive {
+	margin: 0;
+}
+
+@keyframes bounceInUp{
+	0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(0,3000px,0)}60%{opacity:1;transform:translate3d(0,-20px,0)}75%{transform:translate3d(0,10px,0)}90%{transform:translate3d(0,-5px,0)}to{transform:translateZ(0)}
+}
+
+#column-1 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#content {
+	background-color: $color-2;
+	color: $color-1;
+}
+
+#wrapper {
+	padding-top: 0;
+}
+
+.portlet-layout.row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.big-item-list-template h2 + p,
+.list-packages-template h3 + p + p {
+	@include md {
+		min-height: 70px;
+	}
+}
+
+.navbar-header {
+	float: none;
+
+	.logo {
+		display: block;
+		text-align: center;
+
+		img {
+			max-width: 80%;
+		}
+	}
+}
+
+.status-DEAD .aspect-ratio {
+	filter: grayscale(100%); /* Current draft standard */
+    -webkit-filter: grayscale(100%); /* New WebKit */
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%); /* Not yet supported in Gecko, Opera or IE */
+    filter: gray; /* IE */
+    -webkit-filter: grayscale(1); /* Old WebKit */
+}
+
+.jumbotron {
+	background-color: transparent;
+	margin-bottom: 0;
+
+	h2 {
+		font-size: 22px;
+	}
+
+	p {
+		font-size: 16px;
+	}
+
+	.badge {
+		margin-bottom: 18px;
+	}
+
+	.well {
+		background-color: rgba(#FFF, 0.08);
+		border-width: 0;
+
+		.h2 {
+			color: $color-4;
+		}
+
+		.currency {
+			top: -2.5em;
+		}
+
+		p.small {
+			font-size: 85%;
+			margin-top: 40px;
+			opacity: 0.4;
+		}
+
+		& + ul.list-unstyled {
+			opacity: 0.6;
+		}
+	}
+}
+
+.h1 {
+	font-size: 54px;
+
+	@include sm {
+		font-weight: normal;
+		line-height: 1.1;
+	}
+}
+
+.img-spacing {
+	margin-bottom: 15px;
+}
+
+[class$="-background-color"] {
+	padding-bottom: 50px;
+	padding-top: 50px;
+
+	@include sm {
+		padding-bottom: 100px;
+		padding-top: 100px;
+	}
+}
+
+.default-background-color {
+	background-color: $color-2;
+
+	p {
+		opacity: 0.5;
+	}
+
+	&, & a {
+		color: $color-1;
+	}
+}
+
+.main-background-color {
+	background-color: $background-color-3;
+}
+
+.secondary-background-color {
+	background-color: $background-color-1;
+}
+
+.tertiary-background-color {
+	background-color: $background-color-2;
+}
+
+.main-background-color, .secondary-background-color, .tertiary-background-color {
+	color: $color-2;
+
+	a {
+		color: $color-2;
+
+		&:hover, &:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+[class$="-background-image"] {
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: $color-2;
+	padding-bottom: 95px;
+	padding-top: 95px;
+
+	p a {
+		color: $color-2;
+	}
+
+	@include sm {
+		min-height: 560px;
+		padding-bottom: 190px;
+		padding-top: 190px;
+	}
+}
+
+.tertiary-background-image {
+	color: $color-1;
+	position: relative;
+
+	@include media-query(sm, $screen-sm-max) {
+		padding-top: 80px;
+	}
+
+	@include sm {
+		margin-bottom: 95px;
+	}
+
+	p {
+		opacity: 0.5;
+	}
+
+	.col-lg-6.col-md-6 {
+		background-position: bottom right;
+		background-repeat: no-repeat;
+		background-size: contain;
+		bottom: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+@include media-query(null, $breakpoint_tablet - 1) {
+	[class^="col-"] {
+		.default-background-color &,
+		.main-background-color &,
+		.secondary-background-color &,
+		.tertiary-background-color & {
+			margin-bottom: 30px
+		}
+	}
+}
+
+.store-buttons {
+	img {
+		height: 40px;
+		width: auto;
+	}
+}
