@@ -45,6 +45,11 @@ script:
 
     - ./gradlew testIntegration
 
+    # Get test coverage results
+
+    - ./gradlew dumpJacoco
+    - ./gradlew coveralls
+
      # Publish docker image to Docker Hub
 
     - 'if [ "$TRAVIS_EVENT_TYPE" = "push" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
