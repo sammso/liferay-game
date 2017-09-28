@@ -17,6 +17,7 @@ package com.liferay.game.functional.test.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import com.liferay.portal.kernel.util.Validator;
 import org.junit.Assert;
 
 import org.openqa.selenium.By;
@@ -52,10 +53,12 @@ public class CommonSteps {
 		FunctionalTestLocatorsHelper.clickElement(
 			browser, By.xpath("//button[@type='submit']"));
 
-		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
-			browser,
-			By.xpath(
-				"//*[contains(., 'Your request completed successfully.')]"));
+		if (Validator.isNotNull(characterName)) {
+			FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+				browser,
+				By.xpath(
+					"//*[contains(., 'Your request completed successfully.')]"));
+		}
 	}
 
 	public static void addCharacterIfItDoesNotExist(

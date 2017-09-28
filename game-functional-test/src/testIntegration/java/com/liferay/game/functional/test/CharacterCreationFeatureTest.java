@@ -15,6 +15,7 @@
 package com.liferay.game.functional.test;
 
 import com.liferay.game.functional.test.util.CommonSteps;
+import com.liferay.game.functional.test.util.FunctionalTestLocatorsHelper;
 import com.liferay.game.functional.test.util.FunctionalTestUtil;
 
 import cucumber.api.CucumberOptions;
@@ -37,6 +38,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -70,6 +72,8 @@ public class CharacterCreationFeatureTest {
 
 	@Then("^I can't save the character")
 	public void cantSaveCharacter() {
+		FunctionalTestLocatorsHelper.waitForElementToBeVisible(
+			browser, By.xpath("//*[contains(.,'This field is required')]"));
 	}
 
 	@Then("^I see (.+) in the list of characters$")
