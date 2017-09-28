@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.preferences-owned-by-group=false",
 		"com.liferay.portlet.private-request-attributes=false",
 		"com.liferay.portlet.private-session-attributes=false",
-		"com.liferay.portlet.render-weight=0",
+		"com.liferay.portlet.render-weight=1",
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=Game", "javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
