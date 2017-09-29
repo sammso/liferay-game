@@ -62,7 +62,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 	<liferay-frontend:management-bar-buttons>
 		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"list"} %>'
+			displayViews='<%= new String[] {"icon", "list"} %>'
 			portletURL="<%= mainURL %>"
 			selectedDisplayStyle="<%= gameDisplayContext.getDisplayStyle() %>"
 		/>
