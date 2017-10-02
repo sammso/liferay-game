@@ -1,6 +1,6 @@
 {
   "pipeline": {
-    "roleArn": "arn:aws:iam::AWS_ACCOUNT_ID:role/AWS-CodePipeline-Service",
+    "roleArn": "arn:aws:iam::AWS_ACCOUNT_ID:role/CodePipelineServiceRole-APPLICATION_NAME",
     "stages": [
       {
         "name": "get-source",
